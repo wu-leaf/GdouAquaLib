@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GdouAquaLib</string>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+</resources>
