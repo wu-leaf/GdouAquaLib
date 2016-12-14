@@ -22,6 +22,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
+import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
@@ -36,7 +39,10 @@ import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnTouchListener{
+
+    private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7,layout8;
+
     private SearchView searchView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewpager;
@@ -174,6 +180,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (navigationView != null) {
             setupDrawerContent(navigationView);//设置左侧导航抽屉
         }
+
+        layout1 = (LinearLayout)findViewById(R.id.linear1);
+        layout2 = (LinearLayout)findViewById(R.id.linear2);
+        layout3 = (LinearLayout)findViewById(R.id.linear3);
+        layout4 = (LinearLayout)findViewById(R.id.linear4);
+        layout5 = (LinearLayout)findViewById(R.id.linear5);
+        layout6 = (LinearLayout)findViewById(R.id.linear6);
+        layout7 = (LinearLayout)findViewById(R.id.linear7);
+        layout8 = (LinearLayout)findViewById(R.id.linear8);
+        layout1.setOnTouchListener(this);
+        layout2.setOnTouchListener(this);
+        layout3.setOnTouchListener(this);
+        layout4.setOnTouchListener(this);
+        layout5.setOnTouchListener(this);
+        layout6.setOnTouchListener(this);
+        layout7.setOnTouchListener(this);
+        layout8.setOnTouchListener(this);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -239,6 +262,40 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextChange(String newText) {
         return false;
     }
+
+
+    //LinearLayout的touch事件
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        //设置Animation
+        Animation animDwon = AnimationUtils.loadAnimation(this, R.anim.show_down);
+        Animation animUp = AnimationUtils.loadAnimation(this, R.anim.show_up);
+
+        LinearLayout layout = (LinearLayout) v;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //layout.startAnimation(animDwon);
+                //animDwon.setFillAfter(true);
+                break;
+
+            case MotionEvent.ACTION_UP:
+                MLog.d("点击了该事件"+layout.getTag());
+                layout.startAnimation(animDwon);
+                animUp.setFillAfter(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                //layout.startAnimation(animUp);
+               // animUp.setFillAfter(true);
+                break;
+            case MotionEvent.ACTION_BUTTON_RELEASE:
+                //layout.startAnimation(animUp);
+                //animUp.setFillAfter(true);
+                break;
+        }
+        return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+
+
 
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
