@@ -1,5 +1,6 @@
 package com.gdou.www.gdouaqualib;
 
+import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,9 @@ import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
+import com.gdou.www.gdouaqualib.view.activity.CoelenteronActivity;
+import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
+import com.gdou.www.gdouaqualib.view.activity.EchinodermActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
 import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 
@@ -41,8 +45,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnTouchListener{
 
-    private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7,layout8;
-
+    private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7;
     private SearchView searchView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewpager;
@@ -188,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         layout5 = (LinearLayout)findViewById(R.id.linear5);
         layout6 = (LinearLayout)findViewById(R.id.linear6);
         layout7 = (LinearLayout)findViewById(R.id.linear7);
-        layout8 = (LinearLayout)findViewById(R.id.linear8);
+
         layout1.setOnTouchListener(this);
         layout2.setOnTouchListener(this);
         layout3.setOnTouchListener(this);
@@ -196,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         layout5.setOnTouchListener(this);
         layout6.setOnTouchListener(this);
         layout7.setOnTouchListener(this);
-        layout8.setOnTouchListener(this);
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -214,7 +217,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                                 return true;
                             case R.id.action_about:
                                 Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
-                                startActivity(intent_about);
+                                intent_about.putExtra("flag",2);
+                                startActivity(intent_about,
+                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;
                             case R.id.action_guide:
                                 Intent intent_guide = new Intent(MainActivity.this, UserGuideActivity.class);
@@ -282,6 +287,30 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 MLog.d("点击了该事件"+layout.getTag());
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
+                String key = v.getTag().toString();
+                switch(key){
+                    case "jipi":
+                        Intent intent1 = new Intent(MainActivity.this,EchinodermActivity.class);
+                        intent1.putExtra("flag", 0);
+                        startActivity(intent1,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                        .toBundle());
+                        break;
+                    case "haimian":
+                        Intent intent2 = new Intent(MainActivity.this,DetailsActivity.class);
+                        intent2.putExtra("flag",0);
+                        startActivity(intent2,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                        .toBundle());
+                        break;
+                    case "qiangchang":
+                        Intent intent3 = new Intent(MainActivity.this, CoelenteronActivity.class);
+                        intent3.putExtra("flag",1);
+                        startActivity(intent3,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        break;
+                }
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);
@@ -419,8 +448,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     Log.e(TAG,"点击事件");
                     int position = (int) v.getTag()%imageViews.size();
                     String text = imageDescriptions[position];
-                    Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
+                    intent.putExtra("flag",2);
+                    startActivity(intent,
+                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                    .toBundle());
                 }
             });
 

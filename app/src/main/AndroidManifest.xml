@@ -10,26 +10,46 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.WelcomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activity.GuideActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen">
         </activity>
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.SettingActivity">
+        <activity
+            android:name=".view.activity.SettingActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.AboutActivity">
+        <activity
+            android:name=".view.activity.AboutActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.UserGuideActivity">
+        <activity
+            android:name=".view.activity.UserGuideActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.activity.DetailsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.activity.EchinodermActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".view.activity.CoelenteronActivity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 
