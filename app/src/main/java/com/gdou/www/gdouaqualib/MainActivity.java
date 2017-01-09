@@ -38,6 +38,8 @@ import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
 import com.gdou.www.gdouaqualib.view.activity.CoelenteronActivity;
 import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
 import com.gdou.www.gdouaqualib.view.activity.EchinodermActivity;
+import com.gdou.www.gdouaqualib.view.activity.FishActivity;
+import com.gdou.www.gdouaqualib.view.activity.RheidActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
 import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 
@@ -309,6 +311,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         startActivity(intent3,
                                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         break;
+                    case "ruanti":
+                        Intent intent4 = new Intent(MainActivity.this,RheidActivity.class);
+                        intent4.putExtra("flag",1);
+                        startActivity(intent4,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        break;
+                    case "yulei":
+                        Intent intent5 = new Intent(MainActivity.this, FishActivity.class);
+                        intent5.putExtra("flag",2);
+                        startActivity(intent5,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                 }
 
                 break;
@@ -475,8 +488,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //            }
             return view == object;
         }
-
-
         /**
          * 释放资源
          * @param container viewpager
@@ -488,7 +499,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //            super.destroyItem(container, position, object);
 //            Log.e(TAG, "destroyItem==" + position + ",---object==" + object);
             container.removeView((View) object);
-
         }
     }
 }

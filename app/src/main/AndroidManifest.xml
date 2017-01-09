@@ -48,8 +48,16 @@
             android:name=".view.activity.EchinodermActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.CoelenteronActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".view.activity.CoelenteronActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.activity.RheidActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".view.activity.FishActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

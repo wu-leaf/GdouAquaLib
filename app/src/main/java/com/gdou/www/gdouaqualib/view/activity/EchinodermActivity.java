@@ -20,6 +20,7 @@ import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
+//棘皮动物
 public class EchinodermActivity extends AppCompatActivity implements View.OnTouchListener{
 
     private LinearLayout jipi_hs,jipi_hd,jipi_hx;

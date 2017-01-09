@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.MLog;
-
+//腔肠动物
 public class CoelenteronActivity extends AppCompatActivity implements View.OnTouchListener{
     private LinearLayout qc_sm,qc_sh,qc_sx;
     @Override
@@ -40,7 +40,7 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                 break;
         }
         setContentView(R.layout.activity_coelenteron);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("有毒腔肠动物");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
