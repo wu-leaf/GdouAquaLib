@@ -307,13 +307,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         break;
                     case "qiangchang":
                         Intent intent3 = new Intent(MainActivity.this, CoelenteronActivity.class);
-                        intent3.putExtra("flag",1);
+                        intent3.putExtra("flag",2);
                         startActivity(intent3,
                                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         break;
                     case "ruanti":
                         Intent intent4 = new Intent(MainActivity.this,RheidActivity.class);
-                        intent4.putExtra("flag",1);
+                        intent4.putExtra("flag",2);
                         startActivity(intent4,
                                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         break;

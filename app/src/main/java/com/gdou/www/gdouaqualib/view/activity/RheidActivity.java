@@ -1,5 +1,7 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -79,8 +81,14 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
 
+                if(key.contains("ruanti_wai")){
+                    Intent intent4 = new Intent(RheidActivity.this,RheidExogenousActivity.class);
+                    intent4.putExtra("flag",2);
+                    startActivity(intent4,
+                            ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this).toBundle());
+                }else if(key.contains("ruanti_nei")){
 
-                MLog.d(key);
+                }
 
 
                 break;

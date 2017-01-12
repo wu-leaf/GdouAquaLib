@@ -1,5 +1,6 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -79,11 +80,11 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
-
-
-                MLog.d(key);
-
-
+                if (key.contentEquals("duyulei")){
+                    Intent intent = new Intent(FishActivity.this,SimpleFishActivity.class);
+                    intent.putExtra("flag",1);
+                    startActivity(intent);
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);

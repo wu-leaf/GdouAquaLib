@@ -22,7 +22,7 @@
                 android:drawableTop="@drawable/rt_waiyuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="外原性有毒软体动物"
+                android:text="外源性有毒软体动物"
                 android:layout_gravity="center"
                 android:textSize="24dp"
                 />
