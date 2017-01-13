@@ -1,5 +1,6 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,7 +84,7 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                 if (key.contentEquals("duyulei")){
                     Intent intent = new Intent(FishActivity.this,SimpleFishActivity.class);
                     intent.putExtra("flag",1);
-                    startActivity(intent);
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
                 }
                 break;
             case MotionEvent.ACTION_MOVE:

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fenlei">
+        <item></item>
+        <item>海洋有毒腔肠动物</item>
+        <item>海洋有毒鱼类</item>
+        <item>海洋有毒爬行类动物</item>
+        <item>海洋有毒节肢动物</item>
+        <item>海洋有毒棘皮动物</item>
+        <item>海洋有毒软体动物</item>
+        <item>海洋有毒海绵动物</item>
+    </string-array>
+    <string-array name="leixing">
+        <item></item>
+        <item>动物1</item>
+        <item>动物2</item>
+        <item>动物3</item>
+        <item>动物4</item>
+        <item>动物5</item>
+    </string-array>
+</resources>

@@ -64,8 +64,11 @@
             android:name=".view.activity.RheidExogenousActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.activity.SimpleFishActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".view.activity.SimpleFishActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".view.activity.SearchActivity">
         </activity>
     </application>
 

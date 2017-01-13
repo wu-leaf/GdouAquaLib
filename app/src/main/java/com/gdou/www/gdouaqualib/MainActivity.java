@@ -40,12 +40,13 @@ import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
 import com.gdou.www.gdouaqualib.view.activity.EchinodermActivity;
 import com.gdou.www.gdouaqualib.view.activity.FishActivity;
 import com.gdou.www.gdouaqualib.view.activity.RheidActivity;
+import com.gdou.www.gdouaqualib.view.activity.SearchActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
 import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnTouchListener{
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 
     private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7;
     private SearchView searchView;
@@ -239,13 +240,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        SearchManager searchManager =
+       /* SearchManager searchManager =
                 (SearchManager)getSystemService(Context.SEARCH_SERVICE);
         searchView =
                 (SearchView)menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
-        searchView.setOnQueryTextListener(this);
+                .getSearchableInfo(getComponentName()));*/
+
         return true;
     }
 
@@ -255,11 +256,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_search:
+                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                intent.putExtra("flag",2);
+                startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+  /*  @Override
     public boolean onQueryTextSubmit(String query) {
         ToastUtil.show(MainActivity.this,"知道了");
         return false;
@@ -268,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
-    }
+    }*/
 
 
     //LinearLayout的touch事件
