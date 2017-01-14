@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="fenlei">
+    <string-array name="tsystem">
         <item></item>
         <item>海洋有毒腔肠动物</item>
         <item>海洋有毒鱼类</item>
@@ -10,7 +10,7 @@
         <item>海洋有毒软体动物</item>
         <item>海洋有毒海绵动物</item>
     </string-array>
-    <string-array name="leixing">
+    <string-array name="yd_type">
         <item></item>
         <item>动物1</item>
         <item>动物2</item>

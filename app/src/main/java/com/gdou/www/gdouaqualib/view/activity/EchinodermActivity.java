@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
@@ -57,6 +58,8 @@ public class EchinodermActivity extends AppCompatActivity implements View.OnTouc
         jipi_hs.setOnTouchListener(this);
         jipi_hd.setOnTouchListener(this);
         jipi_hx.setOnTouchListener(this);
+
+        ActivityCollector.addActivity(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,5 +111,10 @@ public class EchinodermActivity extends AppCompatActivity implements View.OnTouc
                 break;
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

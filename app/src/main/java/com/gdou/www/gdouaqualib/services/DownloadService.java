@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.Constants;
+import com.gdou.www.gdouaqualib.utils.MLog;
 import com.squareup.okhttp.Request;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -31,6 +32,7 @@ public class DownloadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        MLog.e("下载服务。");
         mNotificationManager =
                 (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
     }
@@ -96,7 +98,6 @@ public class DownloadService extends Service {
      * @param url
      */
     private void downloadFile(String url) {
-
         OkHttpUtils.get().url(url).build()
                 .execute(new FileCallBack(Constants.DOWNLOAD_DIR, "test.apk") {
                     @Override

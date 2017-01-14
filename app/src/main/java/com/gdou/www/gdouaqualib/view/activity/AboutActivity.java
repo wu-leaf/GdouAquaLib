@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.VersionCheck;
 
 public class AboutActivity extends AppCompatActivity {
@@ -42,6 +43,8 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         currentVersion = (TextView)findViewById(R.id.current_version);
         currentVersion.setText("当前版本：" + VersionCheck.getNowVerName(AboutActivity.this));
+
+        ActivityCollector.addActivity(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -51,6 +54,12 @@ public class AboutActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }
 

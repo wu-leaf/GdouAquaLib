@@ -67,7 +67,8 @@
         <LinearLayout
             android:id="@+id/linear1"
             android:tag="haimian"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -85,7 +86,8 @@
         <LinearLayout
             android:id="@+id/linear2"
             android:tag="jipi"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -107,7 +109,8 @@
         <LinearLayout
             android:id="@+id/linear3"
             android:tag="jiezhi"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -124,7 +127,8 @@
         <LinearLayout
             android:tag="paxing"
             android:id="@+id/linear4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -148,7 +152,8 @@
         <LinearLayout
             android:tag="qiangchang"
             android:id="@+id/linear5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:elevation="3dip"
@@ -165,7 +170,8 @@
         <LinearLayout
             android:tag="ruanti"
             android:id="@+id/linear6"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -181,14 +187,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
         <LinearLayout
             android:id="@+id/linear7"
             android:tag="yulei"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="3dp"
@@ -203,7 +206,6 @@
                 android:textSize="24dp"/>
         </LinearLayout>
 
-    </LinearLayout>
 </GridLayout>
     </LinearLayout>
 </LinearLayout>

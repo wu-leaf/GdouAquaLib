@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.MLog;
 
 //软体动物
@@ -52,6 +53,8 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
 
         rt_wai.setOnTouchListener(this);
         rt_nei.setOnTouchListener(this);
+
+        ActivityCollector.addActivity(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -102,5 +105,10 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
                 break;
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

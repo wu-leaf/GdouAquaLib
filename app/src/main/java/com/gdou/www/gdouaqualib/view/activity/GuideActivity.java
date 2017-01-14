@@ -35,6 +35,7 @@ public class GuideActivity extends AppCompatActivity {
         ActivityCollector.addActivity(this);
         initViews();
         //initDots();
+
     }
 
     private void initViews() {

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -51,7 +52,12 @@ public class DetailsActivity extends AppCompatActivity {
         detail_article = (TextView)findViewById(R.id.detail_article);
         detail_img.setImageResource(R.drawable.pro7);
         detail_article.setText(R.string.test_article);
+        ActivityCollector.addActivity(this);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
 }

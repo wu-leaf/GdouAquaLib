@@ -1,12 +1,16 @@
 package com.gdou.www.gdouaqualib;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -31,9 +36,16 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.gdou.www.gdouaqualib.entity.version;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
+import com.gdou.www.gdouaqualib.utils.VersionCheck;
 import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
 import com.gdou.www.gdouaqualib.view.activity.CoelenteronActivity;
 import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
@@ -43,13 +55,15 @@ import com.gdou.www.gdouaqualib.view.activity.RheidActivity;
 import com.gdou.www.gdouaqualib.view.activity.SearchActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
 import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 
     private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7;
-    private SearchView searchView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewpager;
     private TextView tv_title;
@@ -57,6 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ArrayList<ImageView> imageViews;
+
+    private LinearLayout lily;//特意给snackbar使用的
+    long ExitTime;
+
+    version mVersion;
+    private MyApplication app;
+
+    private NavigationView navigationView;
+
     // 图片资源ID
     private final int[] imageIds = {
             R.drawable.pro1,
@@ -115,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         tv_title = (TextView) findViewById(R.id.tv_title);
         ll_point_group = (LinearLayout) findViewById(R.id.ll_point_group);
+
+        lily = (LinearLayout)findViewById(R.id.lily);
+
 ///////////////////////////////////////////////////////////////////////////////
         //ViewPager的使用
         //1.在布局文件中定义ViewPager
@@ -171,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         final ActionBar ab = getSupportActionBar();
         assert ab != null;
-       // ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        // ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -182,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         //NavigationView是左侧侧滑菜单
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);//设置左侧导航抽屉
         }
@@ -203,6 +229,93 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         layout6.setOnTouchListener(this);
         layout7.setOnTouchListener(this);
 
+        ActivityCollector.addActivity(this);
+
+        checkIfNewVersion();
+    }
+
+    private void checkIfNewVersion() {
+        int newVersionCode;
+        goToCheckNewVersion();
+        int now_VersionCode = VersionCheck.getNowVerCode(MainActivity.this);
+
+        Log.e("TAG","now_VersionCode "+ now_VersionCode );
+        app = (MyApplication)getApplication();
+        newVersionCode = app.getValue();
+        Log.e("TAG","new_VersionCode "+ newVersionCode);
+
+        if (VersionCheck.isNewVersion(newVersionCode,now_VersionCode)){
+            Log.e("TAG", "可以更新");
+            //弹出对话框
+            Dialog dialog = new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("软件更新")
+                    .setMessage("有新版本")
+                            // 设置内容
+                    .setPositiveButton("更新",// 设置确定按钮
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    VersionCheck.goUpdate(MainActivity.this);
+                                    ToastUtil.show(MainActivity.this, "正在更新");
+                                }
+                            })
+                    .setNegativeButton("暂不更新",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    // 点击"取消"按钮之后退出程序
+                                    //finish();
+                                }
+                            }).create();// 创建
+            // 显示对话框
+            dialog.show();
+        }
+    }
+
+    private void goToCheckNewVersion() {
+        //检查服务器的app版本号,解析这个:http://each.ac.cn/atmosphere.json，获得versionCode
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://119.29.78.145/gdouaqualib.json";
+                StringRequest request = new StringRequest(Request.Method.GET,
+                        url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.e("TAG", s);
+                        List<version> versionList = parseJSONWithGsonForVersion(s);
+                        for (version ver : versionList){
+                            if (ver != null){
+                                Log.e("TAG", ver.getVersionCode()+";"+ver.getApkUrl());
+                                versionModel(ver);
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("TAG",error.toString());
+                    }
+                });
+                request.setTag("testGet");
+                MyApplication.getHttpQueues().add(request);
+            }
+        }).start();
+    }
+    private void versionModel(version ver) {
+        mVersion = ver;
+        Log.e("TAG", mVersion.getVersionCode()+"  versionModel");
+        int newVersionCode = mVersion.getVersionCode();
+        Log.e("TAG", "newVersionCode  " + newVersionCode);
+        app = (MyApplication)getApplication();
+        app.setValue(newVersionCode);
+    }
+    private  List<version> parseJSONWithGsonForVersion(String jsonData) {
+        Gson gson = new Gson();
+        List<version> versList = gson.fromJson(jsonData,
+                new TypeToken<List<version>>() {}.getType());
+        return versList;
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -216,7 +329,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                 return true;
                             case R.id.action_settings:
                                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-                                startActivity(intent_setting);
+                                intent_setting.putExtra("flag",2);
+                                startActivity(intent_setting, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;
                             case R.id.action_about:
                                 Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
@@ -226,7 +340,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                 return true;
                             case R.id.action_guide:
                                 Intent intent_guide = new Intent(MainActivity.this, UserGuideActivity.class);
-                                startActivity(intent_guide);
+                                intent_guide.putExtra("flag",2);
+                                startActivity(intent_guide, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;
                         }
                         menuItem.setChecked(true);
@@ -506,5 +621,29 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 //            Log.e(TAG, "destroyItem==" + position + ",---object==" + object);
             container.removeView((View) object);
         }
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode != 4 || event.getRepeatCount() != 0) {
+            return super.onKeyDown(keyCode, event);
+        }
+        if (System.currentTimeMillis() - this.ExitTime > 2000) {
+            //Toast.makeText(this, "再按一下，退出应用", Toast.LENGTH_SHORT).show();
+            //先判断侧滑菜单是否打开，是就关闭，否就OK
+                if (mDrawerLayout.isDrawerOpen(navigationView)){
+                    mDrawerLayout.closeDrawers();
+                }else{
+                    Snackbar.make(lily,"再按一次，退出程序", Snackbar.LENGTH_SHORT).show();
+                    this.ExitTime = System.currentTimeMillis();
+                }
+        } else {
+            finish();
+        }
+        return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.finishAll();
     }
 }

@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.MLog;
 
 public class SimpleFishActivity extends AppCompatActivity implements View.OnTouchListener{
@@ -65,6 +66,8 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
         fish_zand.setOnTouchListener(this);
         fish_sqd.setOnTouchListener(this);
         fish_zsd.setOnTouchListener(this);
+
+        ActivityCollector.addActivity(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -109,5 +112,10 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
                 break;
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

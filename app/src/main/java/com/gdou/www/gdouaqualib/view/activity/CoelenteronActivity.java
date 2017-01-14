@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.MLog;
 //腔肠动物
 public class CoelenteronActivity extends AppCompatActivity implements View.OnTouchListener{
@@ -52,6 +53,8 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         qc_sx.setOnTouchListener(this);
         qc_sh.setOnTouchListener(this);
         qc_sm.setOnTouchListener(this);
+
+        ActivityCollector.addActivity(this);
     }
 
 
@@ -104,5 +107,10 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                 break;
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.MLog;
 
 public class RheidExogenousActivity extends AppCompatActivity implements View.OnTouchListener{
@@ -53,6 +54,8 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
         wai_fuxie.setOnTouchListener(this);
         wai_lostmemory.setOnTouchListener(this);
         wai_nerve.setOnTouchListener(this);
+
+        ActivityCollector.addActivity(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,5 +101,10 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
                 break;
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }
