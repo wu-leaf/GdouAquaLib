@@ -9,9 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.gdou.www.gdouaqualib.MainActivity;
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public WelcomeActivity(){
         Log.e("TAG","WelcomeActivity");
+
         this.isFirstIn = false;
         this.mHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -45,8 +52,11 @@ public class WelcomeActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_welcome);
         ActivityCollector.addActivity(this);
+
         init();
     }
+
+
 
     private void init() {
         Log.e("TAG","init");

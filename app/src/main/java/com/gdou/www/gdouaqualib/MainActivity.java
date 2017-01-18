@@ -42,7 +42,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gdou.www.gdouaqualib.entity.version;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
+import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.utils.VersionCheck;
@@ -58,10 +60,17 @@ import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+    public Map<String, Object> map;
+    public Set<String> set;
 
     private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -126,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getJsonForArticleUrl();
+
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -232,7 +244,41 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ActivityCollector.addActivity(this);
 
         checkIfNewVersion();
+
+
     }
+
+    private void getJsonForArticleUrl() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //String u ="http://112.74.187.80/dataService.php?devId=-1";
+               String url = "http://123.207.126.233/fish/GetAllTable?check=EXAA";
+
+             // String url ="http://192.168.88.102:8080/bookstore/ServletTest";
+                StringRequest request = new StringRequest(Request.Method.GET,
+                        url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //解析
+                        map = GsonUtil.toMap(GsonUtil.parseJson(s));
+                        Log.e("TAG", "Map..."+map.toString());
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("TAG",error.toString());
+                    }
+                });
+                request.setTag("Get");
+                MyApplication.getHttpQueues().add(request);
+            }
+        }).start();
+    }
+
+
 
     private void checkIfNewVersion() {
         int newVersionCode;
@@ -279,6 +325,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void run() {
                 String url = "http://119.29.78.145/gdouaqualib.json";
+
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override
@@ -412,6 +459,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
                 switch(key){
+                    case "paxing":
+                        set = map.keySet();// 取得里面的key的集合
+                        if (set.contains("海洋有毒爬行动物概述")){
+                            Log.e("TAG","真xxx");
+                        }
+
+                        String aurl = "http://123.207.126.233/fish/show.jsp?";
+                        String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"","");
+                        Log.e("TAG",burl);
+                        Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
+                        intent0.putExtra("flag",0);
+                        intent0.putExtra("title","有毒爬行动物");
+                        intent0.putExtra("url", aurl+burl);
+                        startActivity(intent0,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                        .toBundle());
+                        break;
                     case "jipi":
                         Intent intent1 = new Intent(MainActivity.this,EchinodermActivity.class);
                         intent1.putExtra("flag", 0);
@@ -422,6 +486,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     case "haimian":
                         Intent intent2 = new Intent(MainActivity.this,DetailsActivity.class);
                         intent2.putExtra("flag",0);
+                        intent2.putExtra("title","有毒海绵动物");
+                        intent2.putExtra("url", "http://123.207.126.233/fish/show.jsp?s_type_num=95279957");
                         startActivity(intent2,
                                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                         .toBundle());
@@ -440,9 +506,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         break;
                     case "yulei":
                         Intent intent5 = new Intent(MainActivity.this, FishActivity.class);
-                        intent5.putExtra("flag",2);
+                        intent5.putExtra("flag", 2);
                         startActivity(intent5,
                                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        break;
+                    case "jiezhi":
+                        Intent intent6 = new Intent(MainActivity.this,DetailsActivity.class);
+                        intent6.putExtra("flag",0);
+                        intent6.putExtra("title","有毒节肢动物");
+                        intent6.putExtra("url", "http://123.207.126.233/fish/show.jsp?s_type_num=60946718");
+                        startActivity(intent6,
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                        .toBundle());
+                        break;
+
                 }
 
                 break;
@@ -583,11 +660,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     int position = (int) v.getTag()%imageViews.size();
                     String text = imageDescriptions[position];
                     //Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
+                    /*Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
                     intent.putExtra("flag",2);
                     startActivity(intent,
                             ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                    .toBundle());
+                                    .toBundle());*/
                 }
             });
 

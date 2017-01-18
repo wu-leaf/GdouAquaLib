@@ -89,6 +89,7 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                     intent.putExtra("flag",1);
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
                 }
+                //http://123.207.126.233/fish/show.jsp?s_type_num=18542163   刺毒鱼类
                 break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);

@@ -48,7 +48,7 @@ public class VersionCheck {
     }
     public static void goUpdate(Context context){
         Intent intent = new Intent(context, DownloadService.class);
-        intent.putExtra("apkUrl", "http://each.ac.cn/newAqualib_apk/app-debug.apk");
+        intent.putExtra("apkUrl", "http://each.ac.cn/newAqualib_apk/app-release.apk");
         context.startService(intent);
     }
 }

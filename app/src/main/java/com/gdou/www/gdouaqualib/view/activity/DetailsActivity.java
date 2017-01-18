@@ -1,30 +1,28 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.view.MenuItem;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.webkit.WebView;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 
 public class DetailsActivity extends AppCompatActivity {
 
 
-    private TextView detail_title;
-    private ImageView detail_img;
-    private TextView detail_article;
+    WebView mWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         int flag = getIntent().getExtras().getInt("flag");
+        String url = getIntent().getExtras().getString("url");
+        String title = getIntent().getExtras().getString("title");
         // 设置不同的动画效果
         switch (flag) {
             case 0:
@@ -42,16 +40,22 @@ public class DetailsActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("有毒海绵生物");
+        toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        detail_title = (TextView)findViewById(R.id.detail_title);
-        detail_title.setText(R.string.test_title);
-        detail_img = (ImageView)findViewById(R.id.detail_img);
-        detail_article = (TextView)findViewById(R.id.detail_article);
-        detail_img.setImageResource(R.drawable.pro7);
-        detail_article.setText(R.string.test_article);
+        mWebView = (WebView)findViewById(R.id.webview);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+
+        mWebView.getSettings().setLoadWithOverviewMode(true);
+        mWebView.getSettings().setUseWideViewPort(true);
+
+        mWebView.getSettings().setBlockNetworkImage(false);//防止阻塞加载图片
+        /*String url ="http://112.74.187.80/chartService.php?devId="+devId;*/
+        // String url= "http://123.207.126.233/fish/newsshow.jsp?news_num=93301";
+        //String url= "http://123.207.126.233/fish/show.jsp?s_type_num=95279957";
+        mWebView.loadUrl(url);
+
         ActivityCollector.addActivity(this);
     }
 
@@ -59,5 +63,14 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollector.removeActivity(this);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
