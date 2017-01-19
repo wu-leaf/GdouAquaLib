@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,13 +17,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
-//软体动物
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * 有毒软体动物
+ * 包括 概述+外源性+内源性
+ */
 public class RheidActivity extends AppCompatActivity implements View.OnTouchListener{
-    private LinearLayout rt_wai,rt_nei;
+    private LinearLayout rt_wai,rt_nei,rt_gaishu;
+
+    public Map<String, Object> map;
+    public Set<String> set;
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +65,15 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rt_wai = (LinearLayout)findViewById(R.id.ruanti_wai);
         rt_nei = (LinearLayout)findViewById(R.id.ruanti_nei);
+        rt_gaishu = (LinearLayout)findViewById(R.id.ruanti_wai_gaishu);
 
         rt_wai.setOnTouchListener(this);
         rt_nei.setOnTouchListener(this);
+        rt_gaishu.setOnTouchListener(this);
+
+        app = (MyApplication)getApplication();
+        map = app.getMap();
+        set = map.keySet();
 
         ActivityCollector.addActivity(this);
     }
@@ -83,16 +104,44 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
-
-                if(key.contains("ruanti_wai")){
-                    Intent intent4 = new Intent(RheidActivity.this,RheidExogenousActivity.class);
-                    intent4.putExtra("flag",2);
-                    startActivity(intent4,
-                            ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this).toBundle());
-                }else if(key.contains("ruanti_nei")){
-
+                switch (key){
+                    case "ruanti_wai":
+                        Intent intent4 = new Intent(RheidActivity.this,RheidExogenousActivity.class);
+                        intent4.putExtra("flag", 2);
+                        startActivity(intent4,
+                                ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this).toBundle());
+                        break;
+                    case "ruanti_wai_gaishu":
+                        if (set.contains("有毒海洋软体动物概述")) {
+                            String burl = map.get("有毒海洋软体动物概述").toString().replace("\"", "");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidActivity.this, DetailsActivity.class);
+                            intent0.putExtra("flag", 0);
+                            intent0.putExtra("title", "有毒软体动物");
+                            intent0.putExtra("url", Constants.AURL + burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this)
+                                            .toBundle());
+                        } else {
+                            ToastUtil.show(RheidActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
+                    case "ruanti_nei":
+                        if (set.contains("内源性毒素贝类")) {
+                            String burl = map.get("内源性毒素贝类").toString().replace("\"", "");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidActivity.this, DetailsActivity.class);
+                            intent0.putExtra("flag", 0);
+                            intent0.putExtra("title", "内源性毒素");
+                            intent0.putExtra("url", Constants.AURL + burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this)
+                                            .toBundle());
+                        } else {
+                            ToastUtil.show(RheidActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
                 }
-
 
                 break;
             case MotionEvent.ACTION_MOVE:

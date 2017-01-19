@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,12 +15,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+
+import java.util.Map;
+import java.util.Set;
+
 //腔肠动物
 public class CoelenteronActivity extends AppCompatActivity implements View.OnTouchListener{
     private LinearLayout qc_sm,qc_sh,qc_sx;
+    public Map<String,Object> mMap;
+    public Set<String> mSet;
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,11 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         qc_sh.setOnTouchListener(this);
         qc_sm.setOnTouchListener(this);
 
+        app = (MyApplication)getApplication();
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(app.getMap2().get("海洋有毒腔肠动物").toString()));
+
+
         ActivityCollector.addActivity(this);
     }
 
@@ -85,15 +101,31 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
+            /**
+             * 思路：在开启的新页面，遍历map，把里面的keyset转成数组，填充到适配器，
+             * 然后 控件设置适配器，还有点击事件。
+             */
+                switch (key){
+                    case "qc_sm":
+                        Map<String,Object> map1;
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("钵水母纲").toString()));
+                        Log.e("TAG","钵水母纲："+ map1.toString());
+                        break;
+                    case "qc_sh":
+                        Map<String,Object> map2;
+                        map2 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("珊瑚虫纲").toString()));
+                        Log.e("TAG","珊瑚虫纲下键值："+ map2.keySet().toString());
+                        break;
+                    case "qc_sx":
+                        Map<String,Object> map3;
+                        map3 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("水螅虫纲").toString()));
+                        Log.e("TAG","水螅虫纲下键值："+ map3.keySet().toString());
+                        break;
+                }
 
-                /*    case "jipi":
-                        Intent intent = new Intent(MainActivity.this,EchinodermActivity.class);
-                        intent.putExtra("flag", 2);
-                        startActivity(intent,
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                        .toBundle());
-                        break;*/
-                MLog.d(key);
 
 
                 break;

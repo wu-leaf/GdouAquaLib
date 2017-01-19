@@ -1,11 +1,14 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,12 +17,26 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
+import java.util.Map;
+import java.util.Set;
+
+
+/**
+ * 外源性有毒软体动物
+ */
 public class RheidExogenousActivity extends AppCompatActivity implements View.OnTouchListener{
     private LinearLayout wai_mabi,wai_fuxie,wai_lostmemory,wai_nerve;
+    public Map<String, Object> map;
+    public Set<String> set;
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +72,10 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
         wai_lostmemory.setOnTouchListener(this);
         wai_nerve.setOnTouchListener(this);
 
+        app = (MyApplication)getApplication();
+        map = app.getMap();
+        set = map.keySet();
+
         ActivityCollector.addActivity(this);
     }
     @Override
@@ -85,9 +106,69 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
+                switch(key){
+                    case "wai_mabi":
+                        if (set.contains("麻痹性毒素贝类")){
+                            String burl = map.get("麻痹性毒素贝类").toString().replace("\"","");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidExogenousActivity.this,DetailsActivity.class);
+                            intent0.putExtra("flag",0);
+                            intent0.putExtra("title","麻痹性毒素");
+                            intent0.putExtra("url", Constants.AURL+burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidExogenousActivity.this)
+                                            .toBundle());
+                        }else{
+                            ToastUtil.show(RheidExogenousActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
+                    case "wai_fuxie":
+                        if (set.contains("腹泻性毒素贝类")){
+                            String burl = map.get("腹泻性毒素贝类").toString().replace("\"","");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidExogenousActivity.this,DetailsActivity.class);
+                            intent0.putExtra("flag",0);
+                            intent0.putExtra("title","腹泻性毒素");
+                            intent0.putExtra("url", Constants.AURL+burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidExogenousActivity.this)
+                                            .toBundle());
+                        }else{
+                            ToastUtil.show(RheidExogenousActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
+                    case "wai_lost_memory":
+                        if (set.contains("记忆丧失毒素贝类")){
+                            String burl = map.get("记忆丧失毒素贝类").toString().replace("\"","");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidExogenousActivity.this,DetailsActivity.class);
+                            intent0.putExtra("flag",0);
+                            intent0.putExtra("title","记忆丧失毒素");
+                            intent0.putExtra("url", Constants.AURL+burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidExogenousActivity.this)
+                                            .toBundle());
+                        }else{
+                            ToastUtil.show(RheidExogenousActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
+                    case "wai_nerve":
+                        if (set.contains("神经性毒素贝类")){
+                            String burl = map.get("神经性毒素贝类").toString().replace("\"","");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(RheidExogenousActivity.this,DetailsActivity.class);
+                            intent0.putExtra("flag",0);
+                            intent0.putExtra("title","神经性毒素");
+                            intent0.putExtra("url", Constants.AURL+burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(RheidExogenousActivity.this)
+                                            .toBundle());
+                        }else{
+                            ToastUtil.show(RheidExogenousActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
+                }
 
-
-                MLog.d(key);
 
 
                 break;

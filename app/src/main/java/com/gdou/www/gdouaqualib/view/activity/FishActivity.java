@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,12 +17,23 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.ToastUtil;
+
+import java.util.Map;
+import java.util.Set;
 
 public class FishActivity extends AppCompatActivity implements View.OnTouchListener {
     private LinearLayout duyulei,ciduyulei,pifuyulei;
+
+    public Map<String, Object> map;
+    public Set<String> set;
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +66,10 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
         pifuyulei.setOnTouchListener(this);
         duyulei.setOnTouchListener(this);
         ciduyulei.setOnTouchListener(this);
+
+        app = (MyApplication)getApplication();
+        map = app.getMap();
+        set = map.keySet();
 
         ActivityCollector.addActivity(this);
     }
@@ -88,8 +104,23 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                     Intent intent = new Intent(FishActivity.this,SimpleFishActivity.class);
                     intent.putExtra("flag",1);
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
-                }
-                //http://123.207.126.233/fish/show.jsp?s_type_num=18542163   刺毒鱼类
+                }else if(key.contentEquals("pifu_ny_duyulei")){
+                    if (set.contains("皮肤粘液毒鱼类概述")){
+                        String burl = map.get("皮肤粘液毒鱼类概述").toString().replace("\"","");
+                        Log.e("TAG", burl);
+                        Intent intent0 = new Intent(FishActivity.this,DetailsActivity.class);
+                        intent0.putExtra("flag",0);
+                        intent0.putExtra("title","皮肤粘液毒鱼类");
+                        intent0.putExtra("url", Constants.AURL+burl);
+                        startActivity(intent0,
+                                ActivityOptions.makeSceneTransitionAnimation(FishActivity.this)
+                                        .toBundle());
+                    }else{
+                        ToastUtil.show(FishActivity.this, "服务器出问题，请稍候...");
+                    }
+                    break;
+            }
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);

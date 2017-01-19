@@ -10,6 +10,23 @@
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
         <LinearLayout
+            android:tag="ruanti_wai_gaishu"
+            android:id="@+id/ruanti_wai_gaishu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:elevation="5dip"
+            android:background="#ffffff">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="有毒软体动物概述"
+                android:layout_gravity="center"
+                android:textSize="40dp"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:tag="ruanti_wai"
             android:id="@+id/ruanti_wai"
             android:layout_width="wrap_content"
