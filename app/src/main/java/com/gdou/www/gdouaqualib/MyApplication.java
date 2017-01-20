@@ -30,6 +30,15 @@ public class MyApplication extends Application{
         return map2;
     }
 
+
+    public void setMap2(Map<String, Object> map2) {
+        this.map2 = map2;
+    }
+    public void setMap(Map<String, Object> map) {
+        this.map = map;
+    }
+
+
     public Map<String, Object> map;
     public Map<String, Object> map2;
 
@@ -43,7 +52,7 @@ public class MyApplication extends Application{
         getJsonAllListUrl();
     }
 
-    private void getJsonAllListUrl() {
+    public void getJsonAllListUrl() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,14 +63,8 @@ public class MyApplication extends Application{
                     public void onResponse(String s) {
                         //解析
                         map2 = GsonUtil.toMap(GsonUtil.parseJson(s));
-                        Log.e("TAG", "Map...sss" + map2.toString());
-                        /*if (map2.keySet().contains("海洋有毒腔肠动物")){
-                            Log.e("TAG","海洋有毒腔肠动物 value..."+map2.get("海洋有毒腔肠动物"));
-                        }
-                        map3 = GsonUtil.toMap(GsonUtil.parseJson(map2.get("海洋有毒腔肠动物").toString()));
-                        Log.e("TAG","map3"+map3.toString());
-                        map4 = GsonUtil.toMap(GsonUtil.parseJson(map3.get("水螅虫纲").toString()));
-                        Log.e("TAG","map4..."+map4.toString());*/
+                        Log.e("TAG", "Map...123" + map2.toString());
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -110,6 +113,8 @@ public class MyApplication extends Application{
     public static RequestQueue getHttpQueues() {
         return queues;
     }
+
+
 
 
 }

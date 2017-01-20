@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_viewpager.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_viewpager.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_list.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_list.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_grid.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_grid.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\layout_listview_in_viewpager.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\layout_listview_in_viewpager.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_list_in_vp.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_list_in_vp.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_scrollview.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_scrollview.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_horizontalscrollview.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_horizontalscrollview.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_webview2.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_webview2.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_expandable_list.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_expandable_list.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\need_this_for_maven.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\pullToRefreshListFragment\\unspecified\\res\\layout\\need_this_for_maven.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_list_fragment.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_list_fragment.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_webview.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\src\\main\\res\\layout\\activity_ptr_webview.xml"
+    }
+]

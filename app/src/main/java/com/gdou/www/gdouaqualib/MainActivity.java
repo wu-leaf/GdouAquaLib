@@ -42,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gdou.www.gdouaqualib.entity.version;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.ChechNetwork;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
@@ -136,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      //  getJsonForArticleUrl();
 
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -242,43 +242,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         layout7.setOnTouchListener(this);
 
         ActivityCollector.addActivity(this);
+        app = (MyApplication)getApplication();
 
+        if (ChechNetwork.isNetworkConnected(this)){
+            //app.getJsonAllListUrl();
+            //app.getJsonForArticleUrl();
+            Log.e("TAG","有网络。。。");
+        }
         checkIfNewVersion();
 
-
     }
-
-    /*private void getJsonForArticleUrl() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //String u ="http://112.74.187.80/dataService.php?devId=-1";
-               String url = "http://123.207.126.233/fish/GetAllTable?check=EXAA";
-
-             // String url ="http://192.168.88.102:8080/bookstore/ServletTest";
-                StringRequest request = new StringRequest(Request.Method.GET,
-                        url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //解析
-                        map = GsonUtil.toMap(GsonUtil.parseJson(s));
-                        Log.e("TAG", "Map..."+map.toString());
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("TAG",error.toString());
-                    }
-                });
-                request.setTag("Get");
-                MyApplication.getHttpQueues().add(request);
-            }
-        }).start();
-    }*/
-
-
 
     private void checkIfNewVersion() {
         int newVersionCode;
@@ -286,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         int now_VersionCode = VersionCheck.getNowVerCode(MainActivity.this);
 
         Log.e("TAG","now_VersionCode "+ now_VersionCode );
-        app = (MyApplication)getApplication();
+
         newVersionCode = app.getValue();
 
         map = app.getMap();
@@ -458,83 +431,88 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             case MotionEvent.ACTION_UP:
                 MLog.d("点击了该事件"+layout.getTag());
-                set = map.keySet();// 取得里面的key的集合
-                layout.startAnimation(animDwon);
-                animUp.setFillAfter(true);
-                String key = v.getTag().toString();
-                switch(key){
-                    case "paxing":
-                        if (set.contains("海洋有毒爬行动物概述")){
-                            String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"","");
-                            Log.e("TAG",burl);
-                            Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                            intent0.putExtra("flag",0);
-                            intent0.putExtra("title","有毒爬行动物");
-                            intent0.putExtra("url", Constants.AURL+burl);
-                            startActivity(intent0,
+                if (map != null){
+                    set = map.keySet();// 取得里面的key的集合
+                    layout.startAnimation(animDwon);
+                    animUp.setFillAfter(true);
+                    String key = v.getTag().toString();
+                    switch(key){
+                        case "paxing":
+                            if (set != null && set.contains("海洋有毒爬行动物概述")){
+                                String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"","");
+                                Log.e("TAG",burl);
+                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
+                                intent0.putExtra("flag",0);
+                                intent0.putExtra("title","有毒爬行动物");
+                                intent0.putExtra("url", Constants.AURL+burl);
+                                startActivity(intent0,
+                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                .toBundle());
+                            }else{
+                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
+                            }
+                            break;
+                        case "jipi":
+                            Intent intent1 = new Intent(MainActivity.this,EchinodermActivity.class);
+                            intent1.putExtra("flag", 0);
+                            startActivity(intent1,
                                     ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                             .toBundle());
-                        }else{
-                            ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                        }
-                        break;
-                    case "jipi":
-                        Intent intent1 = new Intent(MainActivity.this,EchinodermActivity.class);
-                        intent1.putExtra("flag", 0);
-                        startActivity(intent1,
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                        .toBundle());
-                        break;
-                    case "haimian":
-                        if (set.contains("海洋有毒海绵动物概述")){
-                            String burl = map.get("海洋有毒海绵动物概述").toString().replace("\"","");
-                            Log.e("TAG",burl);
-                            Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                            intent0.putExtra("flag",0);
-                            intent0.putExtra("title","有毒海绵动物");
-                            intent0.putExtra("url", Constants.AURL+burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                            .toBundle());
-                        }else{
-                            ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                        }
-                        break;
-                    case "qiangchang":
-                        Intent intent3 = new Intent(MainActivity.this, CoelenteronActivity.class);
-                        intent3.putExtra("flag",2);
-                        startActivity(intent3,
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        break;
-                    case "ruanti":
-                        Intent intent4 = new Intent(MainActivity.this,RheidActivity.class);
-                        intent4.putExtra("flag",2);
-                        startActivity(intent4,
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        break;
-                    case "yulei":
-                        Intent intent5 = new Intent(MainActivity.this, FishActivity.class);
-                        intent5.putExtra("flag", 2);
-                       // intent5.putEx
-                        startActivity(intent5,
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        break;
-                    case "jiezhi":
-                        if (set.contains("海洋有毒节肢动物概述")){
-                            String burl = map.get("海洋有毒节肢动物概述").toString().replace("\"","");
-                            Log.e("TAG",burl);
-                            Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                            intent0.putExtra("flag",0);
-                            intent0.putExtra("title","有毒节肢动物");
-                            intent0.putExtra("url", Constants.AURL+burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                            .toBundle());
-                        }else{
-                            ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                        }
-                        break;
+                            break;
+                        case "haimian":
+                            if (set != null && set.contains("海洋有毒海绵动物概述")){
+                                String burl = map.get("海洋有毒海绵动物概述").toString().replace("\"","");
+                                Log.e("TAG",burl);
+                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
+                                intent0.putExtra("flag",0);
+                                intent0.putExtra("title","有毒海绵动物");
+                                intent0.putExtra("url", Constants.AURL+burl);
+                                startActivity(intent0,
+                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                .toBundle());
+                            }else{
+                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
+                            }
+                            break;
+                        case "qiangchang":
+                            Intent intent3 = new Intent(MainActivity.this, CoelenteronActivity.class);
+                            intent3.putExtra("flag",2);
+                            startActivity(intent3,
+                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            break;
+                        case "ruanti":
+                            Intent intent4 = new Intent(MainActivity.this,RheidActivity.class);
+                            intent4.putExtra("flag",2);
+                            startActivity(intent4,
+                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            break;
+                        case "yulei":
+                            Intent intent5 = new Intent(MainActivity.this, FishActivity.class);
+                            intent5.putExtra("flag", 2);
+                            // intent5.putEx
+                            startActivity(intent5,
+                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            break;
+                        case "jiezhi":
+                            if (set != null && set.contains("海洋有毒节肢动物概述")){
+                                String burl = map.get("海洋有毒节肢动物概述").toString().replace("\"","");
+                                Log.e("TAG",burl);
+                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
+                                intent0.putExtra("flag",0);
+                                intent0.putExtra("title","有毒节肢动物");
+                                intent0.putExtra("url", Constants.AURL+burl);
+                                startActivity(intent0,
+                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                .toBundle());
+                            }else{
+                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
+                            }
+                            break;
 
+                    }
+
+                }else {
+                    ToastUtil.show(MainActivity.this,"请检查网络连接");
                 }
 
                 break;
@@ -644,23 +622,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             imageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()){
+                    switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN://手指按下
-                            Log.e(TAG,"onTouch==手指按下");
+                            Log.e(TAG, "onTouch==手指按下");
                             handler.removeCallbacksAndMessages(null);
                             break;
 
                         case MotionEvent.ACTION_MOVE://手指在这个控件上移动
                             break;
                         case MotionEvent.ACTION_CANCEL://手指在这个控件上移动
-                            Log.e(TAG,"onTouch==事件取消");
+                            Log.e(TAG, "onTouch==事件取消");
 //                            handler.removeCallbacksAndMessages(null);
 //                            handler.sendEmptyMessageDelayed(0,4000);
                             break;
                         case MotionEvent.ACTION_UP://手指离开
-                            Log.e(TAG,"onTouch==手指离开");
+                            Log.e(TAG, "onTouch==手指离开");
                             handler.removeCallbacksAndMessages(null);
-                            handler.sendEmptyMessageDelayed(0,4000);
+                            handler.sendEmptyMessageDelayed(0, 4000);
                             break;
                     }
                     return false;
@@ -671,117 +649,121 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e(TAG,"点击事件");
-                    set = map.keySet();
-                    int position = (int) v.getTag()%imageViews.size();
-                    String text = imageDescriptions[position];
-                  //  Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
-                    switch (text){
-                        case "有毒鱼类":
-                            if (set.contains("海洋有毒鱼类概述")){
-                                String burl = map.get("海洋有毒鱼类概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒鱼类");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒软体动物":
-                            if (set.contains("有毒海洋软体动物概述")){
-                                String burl = map.get("有毒海洋软体动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒软体动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒腔肠动物":
-                            if (set.contains("海洋有毒腔肠动物概述")){
-                                String burl = map.get("海洋有毒腔肠动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒腔肠动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒爬行动物":
-                            if (set.contains("海洋有毒爬行动物概述")){
-                                String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒爬行动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒节肢动物":
-                            if (set.contains("海洋有毒节肢动物概述")){
-                                String burl = map.get("海洋有毒节肢动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒节肢动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒棘皮动物":
-                            if (set.contains("海洋有毒棘皮动物概述")){
-                                String burl = map.get("海洋有毒棘皮动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒棘皮动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
-                        case "有毒海绵动物":
-                            if (set.contains("海洋有毒海绵动物概述")){
-                                String burl = map.get("海洋有毒海绵动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒海绵动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
-                            }
-                            break;
+                    Log.e(TAG, "点击事件");
+                    if (map != null) {
+                        set = map.keySet();
+                        int position = (int) v.getTag() % imageViews.size();
+                        String text = imageDescriptions[position];
+                        //  Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
+                        switch (text) {
+                            case "有毒鱼类":
+                                if (set.contains("海洋有毒鱼类概述")) {
+                                    String burl = map.get("海洋有毒鱼类概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒鱼类");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒软体动物":
+                                if (set.contains("有毒海洋软体动物概述")) {
+                                    String burl = map.get("有毒海洋软体动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒软体动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒腔肠动物":
+                                if (set.contains("海洋有毒腔肠动物概述")) {
+                                    String burl = map.get("海洋有毒腔肠动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒腔肠动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒爬行动物":
+                                if (set.contains("海洋有毒爬行动物概述")) {
+                                    String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒爬行动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒节肢动物":
+                                if (set.contains("海洋有毒节肢动物概述")) {
+                                    String burl = map.get("海洋有毒节肢动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒节肢动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒棘皮动物":
+                                if (set.contains("海洋有毒棘皮动物概述")) {
+                                    String burl = map.get("海洋有毒棘皮动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒棘皮动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                            case "有毒海绵动物":
+                                if (set.contains("海洋有毒海绵动物概述")) {
+                                    String burl = map.get("海洋有毒海绵动物概述").toString().replace("\"", "");
+                                    Log.e("TAG", burl);
+                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent0.putExtra("flag", 0);
+                                    intent0.putExtra("title", "有毒海绵动物");
+                                    intent0.putExtra("url", Constants.AURL + burl);
+                                    startActivity(intent0,
+                                            ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
+                                                    .toBundle());
+                                } else {
+                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                }
+                                break;
+                        }
+                    }else{
+                        ToastUtil.show(MainActivity.this,"请检查网络连接");
                     }
                 }
             });

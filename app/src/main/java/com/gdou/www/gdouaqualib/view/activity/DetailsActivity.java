@@ -1,20 +1,29 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
 public class DetailsActivity extends AppCompatActivity {
-
-
+    private ProgressBar progressBar;
     WebView mWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +48,38 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
         }
         setContentView(R.layout.activity_details);
+        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mWebView = (WebView)findViewById(R.id.webview);
-        mWebView.getSettings().setJavaScriptEnabled(true);
 
+        mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
-
         mWebView.getSettings().setBlockNetworkImage(false);//防止阻塞加载图片
-        /*String url ="http://112.74.187.80/chartService.php?devId="+devId;*/
-        // String url= "http://123.207.126.233/fish/newsshow.jsp?news_num=93301";
-        //String url= "http://123.207.126.233/fish/show.jsp?s_type_num=95279957";
+        mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.loadUrl(url);
 
+        //progressBar.setVisibility(View.GONE);
+
         ActivityCollector.addActivity(this);
+
+    }
+
+    class MyWebViewClient extends WebViewClient {
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+            ToastUtil.show(DetailsActivity.this,"网络异常...");
+        }
     }
 
     @Override
@@ -73,4 +96,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

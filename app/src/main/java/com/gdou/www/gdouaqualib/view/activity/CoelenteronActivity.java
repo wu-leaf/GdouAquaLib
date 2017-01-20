@@ -1,5 +1,7 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,9 @@ import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 import java.util.Set;
@@ -52,6 +57,9 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                 break;
         }
         setContentView(R.layout.activity_coelenteron);
+
+        //EventBus.getDefault().register(this);//注册事件
+
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("有毒腔肠动物");
         setSupportActionBar(toolbar);
@@ -110,19 +118,42 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                         Map<String,Object> map1;
                         map1 = GsonUtil.toMap(GsonUtil
                                 .parseJson(mMap.get("钵水母纲").toString()));
-                        Log.e("TAG","钵水母纲："+ map1.toString());
+                      //  Log.e("TAG","钵水母纲："+ map1.toString());
+                        //Log.e("TAG", "钵水母纲：" + map1.keySet().toString());
+
+
+                        //开启一个activity
+                        Intent intent = new Intent(CoelenteronActivity.this,ParticularActivity.class);
+                        intent.putExtra("flag",2);
+                        intent.putExtra("title","钵水母纲");
+                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(CoelenteronActivity.this).toBundle());
+                        EventBus.getDefault().postSticky(new MessageEvent(map1));
                         break;
                     case "qc_sh":
                         Map<String,Object> map2;
                         map2 = GsonUtil.toMap(GsonUtil
                                 .parseJson(mMap.get("珊瑚虫纲").toString()));
-                        Log.e("TAG","珊瑚虫纲下键值："+ map2.keySet().toString());
+                        //  Log.e("TAG","钵水母纲："+ map1.toString());
+                        //Log.e("TAG", "钵水母纲：" + map1.keySet().toString());
+                        //开启一个activity
+                        Intent intent2 = new Intent(CoelenteronActivity.this,ParticularActivity.class);
+                        intent2.putExtra("flag",2);
+                        intent2.putExtra("title","珊瑚虫纲");
+                        startActivity(intent2, ActivityOptions.makeSceneTransitionAnimation(CoelenteronActivity.this).toBundle());
+                        EventBus.getDefault().postSticky(new MessageEvent(map2));
                         break;
                     case "qc_sx":
                         Map<String,Object> map3;
                         map3 = GsonUtil.toMap(GsonUtil
                                 .parseJson(mMap.get("水螅虫纲").toString()));
-                        Log.e("TAG","水螅虫纲下键值："+ map3.keySet().toString());
+                        //  Log.e("TAG","钵水母纲："+ map1.toString());
+                        //Log.e("TAG", "钵水母纲：" + map1.keySet().toString());
+                        //开启一个activity
+                        Intent intent3 = new Intent(CoelenteronActivity.this,ParticularActivity.class);
+                        intent3.putExtra("flag",2);
+                        intent3.putExtra("title","水螅虫纲");
+                        startActivity(intent3, ActivityOptions.makeSceneTransitionAnimation(CoelenteronActivity.this).toBundle());
+                        EventBus.getDefault().postSticky(new MessageEvent(map3));
                         break;
                 }
 
@@ -143,6 +174,8 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
     @Override
     protected void onDestroy() {
         super.onDestroy();
+       // EventBus.getDefault().unregister(this);
         ActivityCollector.removeActivity(this);
     }
 }
+
