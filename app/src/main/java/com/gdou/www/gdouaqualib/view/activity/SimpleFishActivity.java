@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import com.gdou.www.gdouaqualib.MainActivity;
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
@@ -32,7 +33,7 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
     LinearLayout fish_shj,fish_td,fish_luandu,fish_dd,fish_xqd,fish_gd,fish_zand,fish_sqd,fish_zsd;
     public Map<String, Object> map;
     public Set<String> set;
-    private MyApplication app;
+   // private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +81,9 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
         fish_sqd.setOnTouchListener(this);
         fish_zsd.setOnTouchListener(this);
 
-        app = (MyApplication)getApplication();
-        map = app.getMap();
+       // app = (MyApplication)getApplication();
+
+        map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
 
         ActivityCollector.addActivity(this);

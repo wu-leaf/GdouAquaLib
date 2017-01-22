@@ -40,6 +40,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.entity.version;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.ChechNetwork;
@@ -47,6 +48,7 @@ import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.RefreshMapEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.utils.VersionCheck;
 import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
@@ -61,6 +63,9 @@ import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        EventBus.getDefault().register(this);//注册
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -253,6 +258,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void messageEventBus(RefreshMapEvent event){
+        if (event.mFLAG){
+            Log.e("TAG","eventbus..."+event.mFLAG);
+            map = netWorkMap.getInstance().getMapList();
+        }
+    }
+
     private void checkIfNewVersion() {
         int newVersionCode;
         goToCheckNewVersion();
@@ -262,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         newVersionCode = app.getValue();
 
-        map = app.getMap();
+        map = netWorkMap.getInstance().getMapList();
 
         Log.e("TAG","new_VersionCode "+ newVersionCode);
 
@@ -301,7 +314,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void run() {
                 String url = "http://119.29.78.145/gdouaqualib.json";
-
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override
@@ -418,6 +430,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     //LinearLayout的touch事件
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        map = netWorkMap.getInstance().getMapList();
         //设置Animation
         Animation animDwon = AnimationUtils.loadAnimation(this, R.anim.show_down);
         Animation animUp = AnimationUtils.loadAnimation(this, R.anim.show_up);
@@ -649,6 +662,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    map = netWorkMap.getInstance().getMapList();
+
                     Log.e(TAG, "点击事件");
                     if (map != null) {
                         set = map.keySet();
@@ -821,6 +836,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         ActivityCollector.finishAll();
     }
 }

@@ -85,6 +85,11 @@
             android:enabled="true"
             android:exported="true">
         </service>
+        <receiver android:name=".receiver.networkReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
 
         <activity android:name=".view.activity.ParticularActivity"
                   android:screenOrientation="portrait">

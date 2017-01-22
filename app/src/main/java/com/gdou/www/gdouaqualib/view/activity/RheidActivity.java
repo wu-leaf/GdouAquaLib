@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
@@ -36,7 +37,7 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
 
     public Map<String, Object> map;
     public Set<String> set;
-    private MyApplication app;
+   // private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +72,9 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
         rt_nei.setOnTouchListener(this);
         rt_gaishu.setOnTouchListener(this);
 
-        app = (MyApplication)getApplication();
-        map = app.getMap();
+        //app = (MyApplication)getApplication();
+
+        map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
 
         ActivityCollector.addActivity(this);

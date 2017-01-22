@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
@@ -34,7 +35,7 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
     private LinearLayout qc_sm,qc_sh,qc_sx;
     public Map<String,Object> mMap;
     public Set<String> mSet;
-    private MyApplication app;
+   // private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +74,10 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         qc_sh.setOnTouchListener(this);
         qc_sm.setOnTouchListener(this);
 
-        app = (MyApplication)getApplication();
+        //app = (MyApplication)getApplication();
+
         mMap = GsonUtil.toMap(GsonUtil
-                .parseJson(app.getMap2().get("海洋有毒腔肠动物").toString()));
+                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒腔肠动物").toString()));
 
 
         ActivityCollector.addActivity(this);

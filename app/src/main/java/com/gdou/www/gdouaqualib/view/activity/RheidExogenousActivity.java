@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MLog;
@@ -35,7 +36,7 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
     private LinearLayout wai_mabi,wai_fuxie,wai_lostmemory,wai_nerve;
     public Map<String, Object> map;
     public Set<String> set;
-    private MyApplication app;
+   // private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,9 @@ public class RheidExogenousActivity extends AppCompatActivity implements View.On
         wai_lostmemory.setOnTouchListener(this);
         wai_nerve.setOnTouchListener(this);
 
-        app = (MyApplication)getApplication();
-        map = app.getMap();
+        //app = (MyApplication)getApplication();
+
+        map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
 
         ActivityCollector.addActivity(this);

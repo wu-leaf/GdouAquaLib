@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
@@ -43,10 +44,10 @@ import java.util.Set;
 
 public final class ParticularActivity extends ListActivity {
 
-    public Map<String, Object> map;//非目录树结构
+    public Map<String, Object> mapList;//非目录树结构
     public Map<String,Object> mMap;
     public Set<String> mSet;
-    private MyApplication app;
+    //private MyApplication app;
 
     //private ProgressBar progressBar;
         /**
@@ -90,8 +91,9 @@ public final class ParticularActivity extends ListActivity {
             setContentView(R.layout.activity_particular);
             EventBus.getDefault().register(this);//注册事件
 
-            app = (MyApplication)getApplication();
-            map =app.getMap();//非目录树结构的map
+            //app = (MyApplication)getApplication();
+
+            mapList =netWorkMap.getInstance().getMapList();//非目录树结构的map
 
 
 
@@ -210,7 +212,7 @@ public final class ParticularActivity extends ListActivity {
                     Log.e("TAG", textView.getText().toString());
                     String key = textView.getText().toString();
                     if (mSet.contains(key)){
-                        String burl = map.get(key).toString().replace("\"","");
+                        String burl = mapList.get(key).toString().replace("\"","");
                         Log.e("TAG", burl);
                         Intent intent0 = new Intent(ParticularActivity.this,DetailsActivity.class);
                         intent0.putExtra("flag",0);

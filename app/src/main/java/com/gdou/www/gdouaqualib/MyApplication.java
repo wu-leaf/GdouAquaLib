@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ public class MyApplication extends Application{
     private static RequestQueue queues ;
     private int value;
 
+/*
     public Map<String, Object> getMap() {
         return map;
     }
@@ -37,10 +39,11 @@ public class MyApplication extends Application{
     public void setMap(Map<String, Object> map) {
         this.map = map;
     }
+*/
 
 
-    public Map<String, Object> map;
-    public Map<String, Object> map2;
+    public Map<String, Object> mapList;
+    public Map<String, Object> mapTree;
 
     @Override
     public void onCreate() {
@@ -48,11 +51,11 @@ public class MyApplication extends Application{
         queues = Volley.newRequestQueue(getApplicationContext());
         setValue(0);
         Log.e("TAG", "MyApplication");
-        getJsonForArticleUrl();
-        getJsonAllListUrl();
+        getJsonForArticleUrl();//mapList
+        getJsonAllTreeUrl();//mapTree
     }
 
-    public void getJsonAllListUrl() {
+    public void getJsonAllTreeUrl() {//得到mapTree
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -62,9 +65,10 @@ public class MyApplication extends Application{
                     @Override
                     public void onResponse(String s) {
                         //解析
-                        map2 = GsonUtil.toMap(GsonUtil.parseJson(s));
-                        Log.e("TAG", "Map...123" + map2.toString());
-
+                        mapTree = GsonUtil.toMap(GsonUtil.parseJson(s));
+                        Log.e("TAG", "Map...123" + mapTree.toString());
+                        netWorkMap.getInstance().setMapTree(mapTree);
+                        Log.e("TAG", "activeInfo_MapTree" + netWorkMap.getInstance().getMapTree().toString());
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -78,7 +82,7 @@ public class MyApplication extends Application{
         }).start();
     }
 
-    public void getJsonForArticleUrl() {
+    public void getJsonForArticleUrl() {//得到mapList
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -88,8 +92,10 @@ public class MyApplication extends Application{
                     @Override
                     public void onResponse(String s) {
                         //解析
-                        map = GsonUtil.toMap(GsonUtil.parseJson(s));
-                        Log.e("TAG", "Map...mmm"+map.toString());
+                        mapList = GsonUtil.toMap(GsonUtil.parseJson(s));
+                        Log.e("TAG", "Map...mmm"+mapList.toString());
+                        netWorkMap.getInstance().setMapList(mapList);
+                        Log.e("TAG", "activeInfo_MapList" + netWorkMap.getInstance().getMapList().toString());
                     }
                 }, new Response.ErrorListener() {
                     @Override
