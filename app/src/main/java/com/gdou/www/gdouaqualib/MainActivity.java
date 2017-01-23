@@ -671,8 +671,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         String text = imageDescriptions[position];
                         //  Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
                         switch (text) {
-                            case "有毒鱼类":
-                                if (set.contains("海洋有毒鱼类概述")) {
+                            case "有毒鱼类"://set.contains("海洋有毒鱼类概述")
+                                if (true) {
                                     String burl = map.get("海洋有毒鱼类概述").toString().replace("\"", "");
                                     Log.e("TAG", burl);
                                     Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
@@ -684,7 +684,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                                     .toBundle());
                                 } else {
                                     ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
-                                }
+                               }
                                 break;
                             case "有毒软体动物":
                                 if (set.contains("有毒海洋软体动物概述")) {
