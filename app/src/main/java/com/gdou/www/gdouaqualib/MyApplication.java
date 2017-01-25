@@ -24,22 +24,6 @@ public class MyApplication extends Application{
     private static RequestQueue queues ;
     private int value;
 
-/*
-    public Map<String, Object> getMap() {
-        return map;
-    }
-    public Map<String, Object> getMap2() {
-        return map2;
-    }
-
-
-    public void setMap2(Map<String, Object> map2) {
-        this.map2 = map2;
-    }
-    public void setMap(Map<String, Object> map) {
-        this.map = map;
-    }
-*/
 
 
     public Map<String, Object> mapList;

@@ -114,8 +114,8 @@ public class RheidActivity extends AppCompatActivity implements View.OnTouchList
                                 ActivityOptions.makeSceneTransitionAnimation(RheidActivity.this).toBundle());
                         break;
                     case "ruanti_wai_gaishu":
-                        if (set.contains("有毒海洋软体动物概述")) {
-                            String burl = map.get("有毒海洋软体动物概述").toString().replace("\"", "");
+                        if (set.contains("海洋有毒软体动物概述")) {
+                            String burl = map.get("海洋有毒软体动物概述").toString().replace("\"", "");
                             Log.e("TAG", burl);
                             Intent intent0 = new Intent(RheidActivity.this, DetailsActivity.class);
                             intent0.putExtra("flag", 0);

@@ -21,9 +21,11 @@ import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
+import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -32,10 +34,9 @@ import java.util.Set;
 
 //腔肠动物
 public class CoelenteronActivity extends AppCompatActivity implements View.OnTouchListener{
-    private LinearLayout qc_sm,qc_sh,qc_sx;
+    private LinearLayout qc_sm,qc_sh,qc_sx,qc_gaishu;
     public Map<String,Object> mMap;
     public Set<String> mSet;
-   // private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +70,12 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         qc_sm = (LinearLayout)findViewById(R.id.qc_sm);
         qc_sh = (LinearLayout)findViewById(R.id.qc_sh);
         qc_sx = (LinearLayout)findViewById(R.id.qc_sx);
+        qc_gaishu = (LinearLayout)findViewById(R.id.qc_gaishu);
 
         qc_sx.setOnTouchListener(this);
         qc_sh.setOnTouchListener(this);
         qc_sm.setOnTouchListener(this);
-
+        qc_gaishu.setOnTouchListener(this);
         //app = (MyApplication)getApplication();
 
         mMap = GsonUtil.toMap(GsonUtil
@@ -116,14 +118,27 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
              * 然后 控件设置适配器，还有点击事件。
              */
                 switch (key){
+                    case "qc_gaishu":
+                        Map<String,Object> mapList;
+                        mapList = netWorkMap.getInstance().getMapList();
+                        if (mapList.keySet().contains("海洋有毒腔肠动物概述")){
+                            String burl = mapList.get("海洋有毒腔肠动物概述").toString().replace("\"", "");
+                            Log.e("TAG", burl);
+                            Intent intent0 = new Intent(CoelenteronActivity.this, DetailsActivity.class);
+                            intent0.putExtra("flag", 0);
+                            intent0.putExtra("title", "有毒腔肠动物");
+                            intent0.putExtra("url", Constants.AURL + burl);
+                            startActivity(intent0,
+                                    ActivityOptions.makeSceneTransitionAnimation(CoelenteronActivity.this)
+                                            .toBundle());
+                        }else{
+                            ToastUtil.show(CoelenteronActivity.this, "服务器出问题，请稍候...");
+                        }
+                        break;
                     case "qc_sm":
                         Map<String,Object> map1;
                         map1 = GsonUtil.toMap(GsonUtil
                                 .parseJson(mMap.get("钵水母纲").toString()));
-                      //  Log.e("TAG","钵水母纲："+ map1.toString());
-                        //Log.e("TAG", "钵水母纲：" + map1.keySet().toString());
-
-
                         //开启一个activity
                         Intent intent = new Intent(CoelenteronActivity.this,ParticularActivity.class);
                         intent.putExtra("flag",2);

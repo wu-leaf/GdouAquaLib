@@ -48,6 +48,7 @@ import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.RefreshMapEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.utils.VersionCheck;
@@ -56,6 +57,7 @@ import com.gdou.www.gdouaqualib.view.activity.CoelenteronActivity;
 import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
 import com.gdou.www.gdouaqualib.view.activity.EchinodermActivity;
 import com.gdou.www.gdouaqualib.view.activity.FishActivity;
+import com.gdou.www.gdouaqualib.view.activity.ParticularActivity;
 import com.gdou.www.gdouaqualib.view.activity.RheidActivity;
 import com.gdou.www.gdouaqualib.view.activity.SearchActivity;
 import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
@@ -451,18 +453,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     String key = v.getTag().toString();
                     switch(key){
                         case "paxing":
-                            if (set != null && set.contains("海洋有毒爬行动物概述")){
-                                String burl = map.get("海洋有毒爬行动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒爬行动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
+                            Map<String,Object> mappx;
+                            mappx = netWorkMap.getInstance().getMapTree();
+                            if (mappx.keySet().contains("海洋有毒爬行类动物")) {
+                                mappx = GsonUtil.toMap(GsonUtil
+                                        .parseJson(netWorkMap.getInstance()
+                                                .getMapTree().get("海洋有毒爬行类动物").toString()));
+                                //开启一个activity
+                                Intent intent = new Intent(MainActivity.this,ParticularActivity.class);
+                                intent.putExtra("flag",2);
+                                intent.putExtra("title","有毒爬行类动物");
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                                EventBus.getDefault().postSticky(new MessageEvent(mappx));
+
+                            } else {
+                                ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
                             }
                             break;
                         case "jipi":
@@ -507,18 +512,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                     ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                             break;
                         case "jiezhi":
-                            if (set != null && set.contains("海洋有毒节肢动物概述")){
-                                String burl = map.get("海洋有毒节肢动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
-                                Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
-                                intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒节肢动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
-                                startActivity(intent0,
-                                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
-                                                .toBundle());
-                            }else{
-                                ToastUtil.show(MainActivity.this,"服务器出问题，请稍候...");
+                            Map<String,Object> mapzj;
+                            mapzj = netWorkMap.getInstance().getMapTree();
+                            if (mapzj.keySet().contains("海洋有毒节肢动物")) {
+                                mapzj = GsonUtil.toMap(GsonUtil
+                                        .parseJson(netWorkMap.getInstance()
+                                                .getMapTree().get("海洋有毒节肢动物").toString()));
+                                //开启一个activity
+                                Intent intent = new Intent(MainActivity.this,ParticularActivity.class);
+                                intent.putExtra("flag",2);
+                                intent.putExtra("title","有毒节肢动物");
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                                EventBus.getDefault().postSticky(new MessageEvent(mapzj));
+
+                            } else {
+                                ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
                             }
                             break;
 
@@ -671,8 +679,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         String text = imageDescriptions[position];
                         //  Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
                         switch (text) {
-                            case "有毒鱼类"://set.contains("海洋有毒鱼类概述")
-                                if (true) {
+                            case "有毒鱼类":
+                                if (set.contains("海洋有毒鱼类概述")) {
                                     String burl = map.get("海洋有毒鱼类概述").toString().replace("\"", "");
                                     Log.e("TAG", burl);
                                     Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);

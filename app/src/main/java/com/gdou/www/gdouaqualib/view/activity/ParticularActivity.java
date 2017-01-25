@@ -175,8 +175,17 @@ public final class ParticularActivity extends ListActivity {
             });
 
 
-
-
+            //排序一下更好看
+            String temp = null;
+            for(int i=0;i<mStrings.length-1;i++){
+                for(int j=i+1;j<mStrings.length;j++){
+                    if(mStrings[i].length() > mStrings[j].length()){
+                        temp = mStrings[j];
+                        mStrings[j] = mStrings[i];
+                        mStrings[i] = temp;
+                    }
+                }
+            }
 
 
             //得到ListView

@@ -10,6 +10,35 @@
               android:layout_marginBottom="10dp"
               android:orientation="vertical">
     <LinearLayout
+        android:tag="jipi_gaishu"
+        android:id="@+id/jipi_gaishu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:elevation="5dip"
+        android:background="#ffffff">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="海洋有毒棘皮动物概述"
+            android:gravity="center"
+            android:textSize="29dp"
+            />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="5px"
+        android:background="@android:color/darker_gray"  />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:text="分类："
+        android:textSize="25dp"/>
+    <LinearLayout
         android:tag="jipi_hs"
         android:id="@+id/jipi_hs"
         android:layout_width="wrap_content"

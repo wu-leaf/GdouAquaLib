@@ -1,5 +1,7 @@
 package com.gdou.www.gdouaqualib.view.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -14,13 +17,30 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.gdou.www.gdouaqualib.R;
+import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.GsonUtil;
+import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+
+
 
 public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -47,10 +67,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     @Bind(R.id.btn_reset)
     Button mBtnReset;
 
+
     private String tsystem;
     private String yd_type;
     private boolean flag;
     private String urlstr;
+
+    private Map<String,Object> mapList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +125,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                  * 1判断输入是否全空,全空则提示，否则执行检索
                  */
                 if (checkInput()){
-                   ToastUtil.show(SearchActivity.this,"执行检索..."+urlstr);
+                   ToastUtil.show(SearchActivity.this, "执行检索..." + urlstr);
+                    getDataFromPost();
 
                 }else if (!checkInput()){
                     ToastUtil.show(SearchActivity.this,"请至少输入一项");
@@ -114,6 +138,55 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
+
+
+    private void getDataFromPost() {
+        //使用okhttp  post请求
+        //http://123.207.126.233/fish/GetAllTable?check=EXAA
+        //"http://123.207.126.233/fish/getdb/DoSearch"
+        /**
+         *  .addParams("zname", mZname.getText().toString())
+         .addParams("xname", mXname.getText().toString())
+         .addParams("sname",mSname.getText().toString())
+         .addParams("tsystem", tsystem)
+         .addParams("yd_type", yd_type)
+         .addParams("area", mArea.getText().toString())
+         .addParams("feature", mFeature.getText().toString())
+         .addParams("habit", mHabit.getText().toString())
+         .addParams("symptom", mSymptom.getText().toString())
+         */
+        OkHttpUtils.get()
+                .url("http://123.207.126.233/fish/GetAllTable")
+                .addParams("check","EXAA")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+                        Log.e("TAG", "OkHttpUtils-onError:"+e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                      Log.e("TAG", "OkHttpUtils-onResponse:" + response.toString());
+                        /**
+                         * 1.把response封装成map
+                         * 2.把数据丢给ParticularActivity
+                         */
+                        mapList = GsonUtil.toMap(GsonUtil.parseJson(response));
+                        //打开检索结果页面。
+                        goToResultForSearch(mapList);
+                    }
+                });
+
+    }
+
+    private void goToResultForSearch(Map<String, Object> list) {
+        Intent intent = new Intent(SearchActivity.this,ParticularActivity.class);
+        intent.putExtra("flag",2);
+        intent.putExtra("title","检索结果");
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SearchActivity.this).toBundle());
+        EventBus.getDefault().postSticky(new MessageEvent(mapList));
+    }
     private void allReset() {
         mZname.setText("");
         mXname.setText("");

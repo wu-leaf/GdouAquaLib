@@ -22,10 +22,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="有毒软体动物概述"
-                android:layout_gravity="center"
-                android:textSize="40dp"
+                android:gravity="center"
+                android:textSize="29dp"
                 />
         </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="5px"
+            android:background="@android:color/darker_gray"  />
         <LinearLayout
             android:tag="ruanti_wai"
             android:id="@+id/ruanti_wai"

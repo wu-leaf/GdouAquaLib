@@ -27,6 +27,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
@@ -130,8 +131,10 @@ public class DetailsActivity extends AppCompatActivity {
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             Log.e("TAG","onReceivedError"+description);
             mFailingUrl = failingUrl;//记录失败的url
-            view.loadUrl("file:///android_asset/error.html");//添加显示本地文件
+
+            //view.setLayoutParams();
             view.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
+            view.loadUrl("file:///android_asset/error.html");//添加显示本地文件
         }
 
 
