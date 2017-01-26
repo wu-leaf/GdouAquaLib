@@ -5,10 +5,10 @@
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_bg_bottom.xml",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\drawable\\indicator_bg_bottom.xml"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\drawable\\indicator_bg_top.xml"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable\\indicator_bg_top.xml"
     }
 ]

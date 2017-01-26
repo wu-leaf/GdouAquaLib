@@ -17,10 +17,10 @@ ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidMa
 		ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
 ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml:7:5-9:41
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:7:5-9:40
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:7:5-9:40
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:7:5-9:40
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:7:5-9:40
 MERGED from [MyApplication2:pullToRefreshViewPager:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\pullToRefreshViewPager\unspecified\AndroidManifest.xml:7:5-9:40
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:7:5-9:40
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:7:5-9:40
 	android:targetSdkVersion
 		ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml:9:9-38
 		INJECTED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml
@@ -31,11 +31,11 @@ MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\An
 		INJECTED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml
 application
 ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml:11:5-64:19
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:11:5-20
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:11:5-20
 MERGED from [MyApplication2:pullToRefreshListFragment:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\pullToRefreshListFragment\unspecified\AndroidManifest.xml:7:5-20
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:11:5-20
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:11:5-20
 MERGED from [MyApplication2:pullToRefreshViewPager:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\pullToRefreshViewPager\unspecified\AndroidManifest.xml:11:5-20
-MERGED from [MyApplication2:library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\library\unspecified\AndroidManifest.xml:11:5-20
+MERGED from [MyApplication2:PullToRefresh_library:unspecified] E:\Workspaces\MyApplication2\Android-PullToRefresh\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\AndroidManifest.xml:11:5-20
 	android:label
 		ADDED from E:\Workspaces\MyApplication2\Android-PullToRefresh\src\main\AndroidManifest.xml:14:9-41
 	android:hardwareAccelerated

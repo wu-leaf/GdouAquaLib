@@ -5,14 +5,14 @@
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     }
 ]

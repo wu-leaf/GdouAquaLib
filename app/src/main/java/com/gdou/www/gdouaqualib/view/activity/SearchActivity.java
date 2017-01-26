@@ -3,6 +3,7 @@ package com.gdou.www.gdouaqualib.view.activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,12 +17,15 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.gdou.www.gdouaqualib.MainActivity;
+import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
-import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
@@ -33,7 +37,12 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,12 +77,26 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     Button mBtnReset;
 
 
-    private String tsystem;
-    private String yd_type;
+
     private boolean flag;
     private String urlstr;
 
+    private String zname;
+    private String xname;
+    private String sname;
+    private String tsystem;
+    private String yd_type;
+    private String area;
+    private String feature;
+    private String habit;
+    private String symptom;
+
     private Map<String,Object> mapList;
+    private Map<String,String> keymap = new HashMap<>();
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +127,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         mSpinnerTsystem.setOnItemSelectedListener(this);
         mSpinnerYdType.setOnItemSelectedListener(this);
 
+
+
         ActivityCollector.addActivity(this);
     }
 
@@ -124,6 +149,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 /**
                  * 1判断输入是否全空,全空则提示，否则执行检索
                  */
+                //先清空map
+                if (keymap!=null){
+                    keymap.clear();
+                }
                 if (checkInput()){
                    ToastUtil.show(SearchActivity.this, "执行检索..." + urlstr);
                     getDataFromPost();
@@ -138,46 +167,61 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
+    /**
+     *   /* .addParams("xname",xname)
+     .addParams("sname",sname)
+     .addParams("tsystem",tsystem)
+     .addParams("yd_type",yd_type)
+     .addParams("area",area)
+     .addParams("feature",feature)
+     .addParams("habit",habit)
+     .addParams("symptom",symptom)
+     */
 
 
     private void getDataFromPost() {
-        //使用okhttp  post请求
-        //http://123.207.126.233/fish/GetAllTable?check=EXAA
-        //"http://123.207.126.233/fish/getdb/DoSearch"
-        /**
-         *  .addParams("zname", mZname.getText().toString())
-         .addParams("xname", mXname.getText().toString())
-         .addParams("sname",mSname.getText().toString())
-         .addParams("tsystem", tsystem)
-         .addParams("yd_type", yd_type)
-         .addParams("area", mArea.getText().toString())
-         .addParams("feature", mFeature.getText().toString())
-         .addParams("habit", mHabit.getText().toString())
-         .addParams("symptom", mSymptom.getText().toString())
-         */
-        OkHttpUtils.get()
-                .url("http://123.207.126.233/fish/GetAllTable")
-                .addParams("check","EXAA")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Request request, Exception e) {
-                        Log.e("TAG", "OkHttpUtils-onError:"+e.getMessage().toString());
-                    }
+        if (!keymap.keySet().isEmpty()){
+            OkHttpUtils.get()
+                    .url("http://123.207.126.233/fish/Search")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .params(keymap)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Request request, Exception e) {
+                            Log.e("TAG", "OkHttpUtils-onError:" + e.getMessage().toString());
+                        }
 
-                    @Override
-                    public void onResponse(String response) {
-                      Log.e("TAG", "OkHttpUtils-onResponse:" + response.toString());
-                        /**
-                         * 1.把response封装成map
-                         * 2.把数据丢给ParticularActivity
-                         */
-                        mapList = GsonUtil.toMap(GsonUtil.parseJson(response));
-                        //打开检索结果页面。
-                        goToResultForSearch(mapList);
-                    }
-                });
+                        @Override
+                        public void onResponse(String response) {
+                            Log.e("TAG", "OkHttpUtils-onResponse:" + response.toString());
 
+                            //1.把response封装成map
+                            // 2.把数据丢给ParticularActivity
+
+                            mapList = GsonUtil.toMap(GsonUtil.parseJson(response));
+                            Log.e("TAG", "转换第一次 :" + mapList.keySet().toString());
+
+                            Log.e("TAG", "真个map的值 :" + mapList.values().toString());
+
+                          //  Log.e("TAG","单个键的值： "+mapList.get("灯罩水母").toString());
+
+                          /*  mapList = GsonUtil.toMap(GsonUtil.parseJson(mapList.get("灯罩水母").toString()));
+                            Log.e("TAG", "转换第二次 :" + mapList.keySet().toString());
+                            Log.e("TAG","拿到的图片url： "+mapList.get("p_url").toString());
+                            Log.e("TAG","拿到的图片w_url :"+mapList.get("web_url").toString());*/
+
+                            //打开检索结果页面。
+
+                            if (mapList.toString() =="{}"){
+                                ToastUtil.show(SearchActivity.this,"检索暂无结果，请重新输入");
+                            }else{
+                                goToResultForSearch(mapList);
+                            }
+
+                        }
+                    });
+        }
     }
 
     private void goToResultForSearch(Map<String, Object> list) {
@@ -202,6 +246,59 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
     private boolean checkInput() {
 
+    if (!mZname.getText().toString().isEmpty()){
+        zname = mZname.getText().toString();
+        if (!zname.isEmpty()){
+            keymap.put("zname",zname);
+            Log.e("TAG",zname);
+        }
+
+    }
+    if (!mXname.getText().toString().isEmpty()){
+        xname = mXname.getText().toString();
+        if (!xname.isEmpty()){
+            keymap.put("xname",xname);
+        }
+
+    }
+    if (!mSname.getText().toString().isEmpty()){
+        sname = mSname.getText().toString();
+        if (!sname.isEmpty()){
+            keymap.put("zname",sname);
+        }
+
+    }
+    if (!mArea.getText().toString().isEmpty()){
+        area = mArea.getText().toString();
+        if (!area.isEmpty()){
+            keymap.put("area",area);
+        }
+
+    }
+    if (!mFeature.getText().toString().isEmpty()){
+        feature = mFeature.getText().toString();
+        if (!feature.isEmpty()){
+            keymap.put("feature",feature);
+        }
+
+    }
+    if (!mHabit.getText().toString().isEmpty()){
+        habit = mHabit.getText().toString();
+        if (!habit.isEmpty()){
+            keymap.put("habit",habit);
+        }
+
+    }
+    if (!mSymptom.getText().toString().isEmpty()){
+        symptom = mSymptom.getText().toString();
+        if (!symptom.isEmpty()){
+            keymap.put("symptom",symptom);
+        }
+
+    }
+
+
+
      urlstr = mZname.getText().toString()
              +mXname.getText().toString()
              +mSname.getText().toString()
@@ -224,9 +321,16 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         //判断是哪个spinner
         if (parent.getTag().toString().contains("tsystem")){
                 tsystem =SearchActivity.this.getResources().getStringArray(R.array.tsystem)[position];
+           if (!tsystem.isEmpty()){
+               keymap.put("tsystem",tsystem);
+           }
 
             }else if (parent.getTag().toString().contains("yd_type")){
                 yd_type =SearchActivity.this.getResources().getStringArray(R.array.yd_type)[position];
+           if (!yd_type.isEmpty()){
+               keymap.put("yd_type",yd_type);
+           }
+
         }
         }
 

@@ -33,7 +33,7 @@
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ptr_expandable_list.xml",
@@ -41,7 +41,7 @@
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\library\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+        "source": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
         "merged": "E:\\Workspaces\\MyApplication2\\Android-PullToRefresh\\build\\intermediates\\res\\merged\\debug\\layout\\need_this_for_maven.xml",

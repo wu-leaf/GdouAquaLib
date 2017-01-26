@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\pullToRefreshListFragment\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\pullToRefreshListFragment\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "E:\\Workspaces\\MyApplication2\\pullToRefreshListFragment\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "E:\\Workspaces\\MyApplication2\\pullToRefreshListFragment\\build\\intermediates\\exploded-aar\\MyApplication2\\PullToRefresh_library\\unspecified\\res\\drawable\\indicator_bg_bottom.xml"
+    }
+]
