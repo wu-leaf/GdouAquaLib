@@ -47,6 +47,7 @@ import com.gdou.www.gdouaqualib.utils.ChechNetwork;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
+import com.gdou.www.gdouaqualib.utils.HtmlUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.RefreshMapEvent;
@@ -480,11 +481,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         case "haimian":
                             if (set != null && set.contains("海洋有毒海绵动物概述")){
                                 String burl = map.get("海洋有毒海绵动物概述").toString().replace("\"","");
-                                Log.e("TAG",burl);
+                                Log.e("TAG", burl);
                                 Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
                                 intent0.putExtra("flag",0);
-                                intent0.putExtra("title","有毒海绵动物");
-                                intent0.putExtra("url", Constants.AURL+burl);
+                                intent0.putExtra("title", "有毒海绵动物");
+                                intent0.putExtra("url", "http://www.csdn.net/article/2017-01-16/2826688");
+                                //intent0.putExtra("url", Constants.AURL+burl);
                                 startActivity(intent0,
                                         ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                                 .toBundle());

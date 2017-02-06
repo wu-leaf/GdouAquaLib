@@ -51,4 +51,6 @@ dependencies {
     compile project(':PullToRefresh_library')
     compile files('libs/eventbus-3.0.0-sources.jar')
     compile files('libs/eventbus-3.0.0.jar')
+    // 使用jsoup解析HTML页面
+    compile 'org.jsoup:jsoup:1.9.2'
 }
