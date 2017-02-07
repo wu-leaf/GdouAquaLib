@@ -203,11 +203,11 @@ public final class ParticularActivity extends ListActivity {
              * Add Sound Event Listener
              * 添加刷新事件并且发出声音
              */
-            SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(this);
-            soundListener.addSoundEvent(PullToRefreshBase.State.PULL_TO_REFRESH, R.raw.pull_event);
-            soundListener.addSoundEvent(PullToRefreshBase.State.RESET, R.raw.reset_sound);
-            soundListener.addSoundEvent(PullToRefreshBase.State.REFRESHING, R.raw.refreshing_sound);
-            mPullRefreshListView.setOnPullEventListener(soundListener);
+           // SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(this);
+           // soundListener.addSoundEvent(PullToRefreshBase.State.PULL_TO_REFRESH, R.raw.pull_event);
+           // soundListener.addSoundEvent(PullToRefreshBase.State.RESET, R.raw.reset_sound);
+           // soundListener.addSoundEvent(PullToRefreshBase.State.REFRESHING, R.raw.refreshing_sound);
+           // mPullRefreshListView.setOnPullEventListener(soundListener);
 
             // You can also just use setListAdapter(mAdapter) or
             // mPullRefreshListView.setAdapter(mAdapter)

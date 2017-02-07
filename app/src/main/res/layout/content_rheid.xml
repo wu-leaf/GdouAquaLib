@@ -34,7 +34,7 @@
         <LinearLayout
             android:tag="ruanti_wai"
             android:id="@+id/ruanti_wai"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
@@ -52,7 +52,7 @@
         <LinearLayout
             android:tag="ruanti_nei"
             android:id="@+id/ruanti_nei"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"

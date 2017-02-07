@@ -43,7 +43,7 @@
         <LinearLayout
             android:tag="qc_sm"
             android:id="@+id/qc_sm"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
@@ -61,7 +61,7 @@
         <LinearLayout
             android:tag="qc_sh"
             android:id="@+id/qc_sh"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
@@ -79,7 +79,7 @@
         <LinearLayout
             android:tag="qc_sx"
             android:id="@+id/qc_sx"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"

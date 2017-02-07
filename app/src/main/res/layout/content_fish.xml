@@ -12,7 +12,7 @@
         <LinearLayout
             android:tag="duyulei"
             android:id="@+id/duyulei"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
@@ -30,7 +30,7 @@
         <LinearLayout
             android:tag="ciduyulei"
             android:id="@+id/ciduyulei"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
@@ -48,7 +48,7 @@
         <LinearLayout
             android:tag="pifu_ny_duyulei"
             android:id="@+id/pifu_ny_duyulei"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
