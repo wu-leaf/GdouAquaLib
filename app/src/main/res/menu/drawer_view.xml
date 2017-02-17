@@ -10,18 +10,14 @@
 
     <item android:title="其他">
         <menu>
+
             <item
-                android:id="@+id/action_guide"
-                android:icon="@drawable/guide"
-                android:title="使用指南"
-                />
-            <item
-                android:id="@+id/action_settings"
-                android:icon="@drawable/ic_settings"
-                android:title="设置" />
+                android:id="@+id/action_update"
+                android:icon="@drawable/checkupdate"
+                android:title="检查更新" />
             <item
                 android:id="@+id/action_about"
-                android:icon="@drawable/ic_info"
+                android:icon="@drawable/about"
                 android:title="关于" />
         </menu>
     </item>

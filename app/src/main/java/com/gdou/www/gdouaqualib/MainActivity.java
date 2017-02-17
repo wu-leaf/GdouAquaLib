@@ -78,6 +78,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+    int newVersionCode;
+    int now_VersionCode;
+
+
     public Map<String, Object> map;
     public Set<String> set;
 
@@ -270,9 +274,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void checkIfNewVersion() {
-        int newVersionCode;
+
         goToCheckNewVersion();
-        int now_VersionCode = VersionCheck.getNowVerCode(MainActivity.this);
+        now_VersionCode = VersionCheck.getNowVerCode(MainActivity.this);
 
         Log.e("TAG","now_VersionCode "+ now_VersionCode );
 
@@ -283,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Log.e("TAG","new_VersionCode "+ newVersionCode);
 
         if (VersionCheck.isNewVersion(newVersionCode,now_VersionCode)){
-            Log.e("TAG", "可以更新");
+
             //弹出对话框
             Dialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("软件更新")
@@ -365,21 +369,22 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             case R.id.nav_home:
                                 mDrawerLayout.closeDrawers();
                                 return true;
-                            case R.id.action_settings:
+                          /*  case R.id.action_others:
                                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
                                 intent_setting.putExtra("flag",2);
                                 startActivity(intent_setting, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                                return true;
+                                return true;*/
                             case R.id.action_about:
                                 Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
                                 intent_about.putExtra("flag",2);
                                 startActivity(intent_about,
                                         ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;
-                            case R.id.action_guide:
-                                Intent intent_guide = new Intent(MainActivity.this, UserGuideActivity.class);
-                                intent_guide.putExtra("flag",2);
-                                startActivity(intent_guide, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            case R.id.action_update:
+                                checkIfNewVersion();
+                                if (!VersionCheck.isNewVersion(newVersionCode,now_VersionCode)){
+                                    ToastUtil.show(MainActivity.this,"已是最新版本");
+                                }
                                 return true;
                         }
                         menuItem.setChecked(true);
