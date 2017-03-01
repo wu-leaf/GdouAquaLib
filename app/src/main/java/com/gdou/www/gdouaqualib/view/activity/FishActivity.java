@@ -22,8 +22,12 @@ import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
+import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +37,7 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
 
     public Map<String, Object> map;
     public Set<String> set;
-   // private MyApplication app;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,11 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
 
         map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
+/*
+
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒鱼类").toString()));
+*/
 
         ActivityCollector.addActivity(this);
     }
@@ -106,7 +115,11 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                     Intent intent = new Intent(FishActivity.this,SimpleFishActivity.class);
                     intent.putExtra("flag",1);
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
-                }else if(key.contentEquals("pifu_ny_duyulei")){
+                }else if (key.contentEquals("ciduyulei")){
+                     Intent intent = new Intent(FishActivity.this,ThornFishAcitvity.class);
+                     intent.putExtra("flag",1);
+                     startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
+                } else if(key.contentEquals("pifu_ny_duyulei")){
                     if (set.contains("皮肤粘液毒鱼类概述")){
                         String burl = map.get("皮肤粘液毒鱼类概述").toString().replace("\"","");
                         Log.e("TAG", burl);

@@ -27,6 +27,7 @@ import com.gdou.www.gdouaqualib.MainActivity;
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
@@ -167,22 +168,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    /**
-     *   /* .addParams("xname",xname)
-     .addParams("sname",sname)
-     .addParams("tsystem",tsystem)
-     .addParams("yd_type",yd_type)
-     .addParams("area",area)
-     .addParams("feature",feature)
-     .addParams("habit",habit)
-     .addParams("symptom",symptom)
-     */
+
 
 
     private void getDataFromPost() {
         if (!keymap.keySet().isEmpty()){
             OkHttpUtils.get()
-                    .url("http://123.207.126.233/fish/Search")
+                    .url(Constants.SERVER_URL+"/fish/Search")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .params(keymap)
                     .build()

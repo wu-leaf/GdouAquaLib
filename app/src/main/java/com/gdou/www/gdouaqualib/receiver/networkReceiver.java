@@ -56,7 +56,7 @@ public class networkReceiver extends BroadcastReceiver {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://123.207.126.233/fish/GetAllList?check=EXAA";
+                String url = "http://192.168.2.101:8080/fish/GetAllList?check=EXAA";
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override
@@ -83,7 +83,7 @@ public class networkReceiver extends BroadcastReceiver {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://123.207.126.233/fish/GetAllTable?check=EXAA";
+                String url = "http://192.168.2.101:8080/fish/GetAllTable?check=EXAA";
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override

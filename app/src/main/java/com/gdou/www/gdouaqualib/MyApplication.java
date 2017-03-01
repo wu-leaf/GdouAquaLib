@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gdou.www.gdouaqualib.entity.netWorkMap;
+import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
 
 import org.json.JSONObject;
@@ -43,12 +44,12 @@ public class MyApplication extends Application{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://123.207.126.233/fish/GetAllList?check=EXAA";
-                StringRequest request = new StringRequest(Request.Method.GET,
-                        url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //解析
+                String url = Constants.SERVER_URL+"/fish/GetAllList?check=EXAA";
+                        StringRequest request = new StringRequest(Request.Method.GET,
+                                url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String s) {
+                                //解析
                         mapTree = GsonUtil.toMap(GsonUtil.parseJson(s));
                         Log.e("TAG", "Map...123" + mapTree.toString());
                         netWorkMap.getInstance().setMapTree(mapTree);
@@ -70,7 +71,7 @@ public class MyApplication extends Application{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://123.207.126.233/fish/GetAllTable?check=EXAA";
+                String url = Constants.SERVER_URL+"/fish/GetAllTable?check=EXAA";
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override

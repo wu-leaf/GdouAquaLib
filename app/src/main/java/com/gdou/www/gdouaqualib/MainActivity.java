@@ -316,11 +316,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void goToCheckNewVersion() {
-        //检查服务器的app版本号,解析这个:http://each.ac.cn/atmosphere.json，获得versionCode
+        //检查服务器的app版本号,解析json 获得versionCode
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://119.29.78.145/gdouaqualib.json";
+                String url = Constants.CHECK_VERSION;
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override
@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("TAG",error.toString());
+                        Log.e("TAG","goToCheckNewVersion"+error.toString());
                     }
                 });
                 request.setTag("testGet");
@@ -490,8 +490,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                 Intent intent0 = new Intent(MainActivity.this,DetailsActivity.class);
                                 intent0.putExtra("flag",0);
                                 intent0.putExtra("title", "有毒海绵动物");
-                                intent0.putExtra("url", "http://www.csdn.net/article/2017-01-16/2826688");
-                                //intent0.putExtra("url", Constants.AURL+burl);
+                                intent0.putExtra("url", Constants.AURL+burl);
                                 startActivity(intent0,
                                         ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                                 .toBundle());

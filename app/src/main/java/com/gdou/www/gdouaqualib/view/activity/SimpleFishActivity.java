@@ -28,7 +28,7 @@ import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
 import java.util.Map;
 import java.util.Set;
-
+//毒鱼类
 public class SimpleFishActivity extends AppCompatActivity implements View.OnTouchListener{
     LinearLayout fish_shj,fish_td,fish_luandu,fish_dd,fish_xqd,fish_gd,fish_zand,fish_sqd,fish_zsd;
     public Map<String, Object> map;
