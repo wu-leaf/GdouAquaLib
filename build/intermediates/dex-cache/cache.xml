@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.github.d-max\spots-dialog\0.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f82b3f786bf4937ed1a1cc9a9a811e154813ba9a">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\debug\com.github.d-max-spots-dialog-0.4_df6f4f44b0412dd7228f62c0fee22b49d4b26cf9.jar" />
+    </item>
+
+</items>

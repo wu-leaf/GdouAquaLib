@@ -33,12 +33,15 @@ import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 
+import dmax.dialog.SpotsDialog;
+
 public class DetailsActivity extends AppCompatActivity {
-    private ProgressBar progressBar;
+
     WebView mWebView;
     private String url;
     // 用于记录出错页面的url 方便重新加载
     private String mFailingUrl = null;
+    private SpotsDialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,10 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
         }
         setContentView(R.layout.activity_details);
-        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
+
+        mDialog = new SpotsDialog(this,"loading....");
+        mDialog.show();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -126,7 +132,8 @@ public class DetailsActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            progressBar.setVisibility(View.GONE);
+            if(mDialog !=null && mDialog.isShowing())
+                mDialog.dismiss( );
         }
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             Log.e("TAG","onReceivedError"+description);

@@ -3,10 +3,10 @@ package com.gdou.www.gdouaqualib.utils;
 
 public class Constants {
 	//文章url前缀
-	public static final String AURL = "http://192.168.2.100:8080/fish/show.jsp?";
+	public static final String AURL = "http://192.168.2.102:8080/fish/show.jsp?";
 
 	//获取后台全部json数据的前缀:服务器地址
-	public static final String SERVER_URL = "http://192.168.2.100:8080";
+	public static final String SERVER_URL = "http://192.168.2.102:8080";
 
 	//软件更新下载安装包的路径
 	public static final String DOWNLOAD_DIR = "/sdcard/test/";
