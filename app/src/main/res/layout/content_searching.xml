@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:entries="@array/tsystem"></Spinner>
     </LinearLayout>
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/yd_type"></Spinner>
-    </LinearLayout>
+    </LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

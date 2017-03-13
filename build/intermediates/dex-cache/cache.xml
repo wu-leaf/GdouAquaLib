@@ -2,11 +2,158 @@
 <items version="2" >
 
     <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\MyApplication2\PullToRefresh_library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b9410caa9919aad95f3e2bc85e00f12567439249">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\MyApplication2-PullToRefresh_library-unspecified_1b569b32c6c6ff96a81af9030a25e2f1f6d5d4d3.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\butterknife-7.0.1_a4fcc49953267ad85bfca24d69bec69df29a73f7.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.4.0_2383c23ea9027fa71d47e572abdba7358e24d1d0.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\libs\eventbus-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\eventbus-3.0.0_ec8d41faa2438d2854f39d152de5a1c6be7946ff.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\libs\Volley.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="77faa9ffd189160d1e22c58fdf5eed0a9a08b816">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\Volley_03c613e30b3bb538f70e92e16e172968182387e0.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-animated-vector-drawable-23.4.0_980916c8ce0fac5f6804fa8f765683f876210041.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.zhy\okhttputils\2.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fdb2999a05364a8f66f4985624e18e949427d4ee">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.zhy-okhttputils-2.0.0_666f44ab9c7eca8b6e5853929106748fc79e51b3.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.4.0_94e90f486f9e637c6fd21c77a744063d4cc82a2e.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\gson-2.6.2_035393398fa7ae1b2ce54c8e86cbdc9019f3fc64.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\okio-1.9.0_734803856054ad5aed6a2ccc5da68a1ede22fbe0.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\okhttp-3.4.1_27f7b75e275dafd941b1271f5c4df8ae42610c54.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.9.2\5e3bda828a80c7a21dfbe2308d1755759c2fd7b4\jsoup-1.9.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5e3bda828a80c7a21dfbe2308d1755759c2fd7b4">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\jsoup-1.9.2_61a10c87044d814ea0862d5a4a32dc4675c41c0f.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.orhanobut\logger\1.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="109f0ec452925b46b500e8d28ee2cd2d1a0145a9">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.orhanobut-logger-1.4_bc53d2f6a53bfd7eca6ed46bedd9aa6787808aa7.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-23.4.0_f075c45c1e0363f0b30a667ccb1f8f3a6dc23413.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.4.0_3f527a8ddcc6b35daa37f884928cd43896f0ce95.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-design-23.4.0_a49f0f4147e2001cec9a4199081f9c7d95035149.jar" />
+    </item>
+    <item
+        jar="D:\adt-bundle-windows-x64\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\support-annotations-23.4.0_159734c18968015cc375dc56f47f49b36a9ef0a5.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\internal_impl-23.4.0_682662e91ff6c1583a17e9f4739a3e7b93b6cd27.jar" />
+    </item>
+    <item
         jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.github.d-max\spots-dialog\0.4\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="f82b3f786bf4937ed1a1cc9a9a811e154813ba9a">
-        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\debug\com.github.d-max-spots-dialog-0.4_df6f4f44b0412dd7228f62c0fee22b49d4b26cf9.jar" />
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.github.d-max-spots-dialog-0.4_df6f4f44b0412dd7228f62c0fee22b49d4b26cf9.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\glide-3.7.0_dde91fdb7a2f6249ec34d2072180f1ee86cd6b81.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\MyApplication2\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\com.android.support-cardview-v7-23.4.0_f9e44a0e11d1addf99d04e94391a421c24652614.jar" />
+    </item>
+    <item
+        jar="C:\Users\ASUS\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="E:\Workspaces\MyApplication2\app\build\intermediates\pre-dexed\release\okhttp-2.5.0_d07c4c2ab4d32050d53d91351c0362af57df8bea.jar" />
     </item>
 
 </items>

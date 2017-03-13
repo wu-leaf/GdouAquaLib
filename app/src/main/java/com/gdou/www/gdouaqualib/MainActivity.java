@@ -697,7 +697,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                             ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                                     .toBundle());
                                 } else {
-                                    ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
+                                    ToastUtil.show(MainActivity.this, "暂无介绍");
                                }
                                 break;
                             case "有毒软体动物":

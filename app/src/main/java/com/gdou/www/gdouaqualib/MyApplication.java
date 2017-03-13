@@ -44,7 +44,7 @@ public class MyApplication extends Application{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constants.SERVER_URL+"/fish/GetAllList?check=EXAA";
+                String url = Constants.SERVER_URL+"/GetAllList?check=EXAA";
                         StringRequest request = new StringRequest(Request.Method.GET,
                                 url, new Response.Listener<String>() {
                             @Override
@@ -71,7 +71,7 @@ public class MyApplication extends Application{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constants.SERVER_URL+"/fish/GetAllTable?check=EXAA";
+                String url = Constants.SERVER_URL+"/GetAllTable?check=EXAA";
                 StringRequest request = new StringRequest(Request.Method.GET,
                         url, new Response.Listener<String>() {
                     @Override

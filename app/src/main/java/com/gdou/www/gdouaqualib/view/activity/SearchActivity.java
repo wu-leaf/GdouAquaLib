@@ -62,8 +62,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     TextInputEditText mSname;//俗名
     @Bind(R.id.spinner_tsystem)
     Spinner mSpinnerTsystem;//分类系统
-    @Bind(R.id.spinner_yd_type)
-    Spinner mSpinnerYdType;//有毒类型
+   /* @Bind(R.id.spinner_yd_type)
+    Spinner mSpinnerYdType;//有毒类型*/
     @Bind(R.id.area)
     TextInputEditText mArea;//区域
     @Bind(R.id.feature)
@@ -126,7 +126,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mSpinnerTsystem.setOnItemSelectedListener(this);
-        mSpinnerYdType.setOnItemSelectedListener(this);
+        //mSpinnerYdType.setOnItemSelectedListener(this);
 
 
 
@@ -174,8 +174,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     private void getDataFromPost() {
         if (!keymap.keySet().isEmpty()){
             OkHttpUtils.get()
-                    .url(Constants.SERVER_URL+"/fish/Search")
-                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .url(Constants.SERVER_URL+"/Search")
+                    //.addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .params(keymap)
                     .build()
                     .execute(new StringCallback() {
@@ -196,14 +196,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
                             Log.e("TAG", "真个map的值 :" + mapList.values().toString());
 
-                          //  Log.e("TAG","单个键的值： "+mapList.get("灯罩水母").toString());
-
-                          /*  mapList = GsonUtil.toMap(GsonUtil.parseJson(mapList.get("灯罩水母").toString()));
-                            Log.e("TAG", "转换第二次 :" + mapList.keySet().toString());
-                            Log.e("TAG","拿到的图片url： "+mapList.get("p_url").toString());
-                            Log.e("TAG","拿到的图片w_url :"+mapList.get("web_url").toString());*/
-
-                            //打开检索结果页面。
 
                             if (mapList.toString() =="{}"){
                                 ToastUtil.show(SearchActivity.this,"检索暂无结果，请重新输入");
@@ -233,7 +225,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         mSymptom.setText("");
 
         mSpinnerTsystem.setSelection(0);
-        mSpinnerYdType.setSelection(0);
+        //mSpinnerYdType.setSelection(0);
     }
 
     private boolean checkInput() {
@@ -295,7 +287,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
              +mXname.getText().toString()
              +mSname.getText().toString()
              +tsystem
-             +yd_type
+             //+yd_type
              +mArea.getText().toString()
              +mFeature.getText().toString()
              +mHabit.getText().toString()
