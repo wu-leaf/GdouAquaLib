@@ -686,17 +686,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         //  Toast.makeText(MainActivity.this, "text=="+text, Toast.LENGTH_SHORT).show();
                         switch (text) {
                             case "有毒鱼类":
-                                if (set.contains("海洋有毒鱼类概述")) {
+                               if (set.contains("海洋有毒鱼类概述")) {
                                     String burl = map.get("海洋有毒鱼类概述").toString().replace("\"", "");
                                     Log.e("TAG", burl);
-                                    Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
-                                    intent0.putExtra("flag", 0);
-                                    intent0.putExtra("title", "有毒鱼类");
-                                    intent0.putExtra("url", Constants.AURL + burl);
-                                    startActivity(intent0,
+                                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                                    intent.putExtra("flag", 0);
+                                    intent.putExtra("title", "有毒鱼类");
+                                    intent.putExtra("url",Constants.SERVER_URL+burl);
+
+                                    startActivity(intent,
                                             ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)
                                                     .toBundle());
-                                } else {
+                               } else {
                                     ToastUtil.show(MainActivity.this, "暂无介绍");
                                }
                                 break;

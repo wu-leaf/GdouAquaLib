@@ -96,13 +96,13 @@ public class DetailsActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(false);
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
        // mWebView.getSettings().setDomStorageEnabled(true);
        // mWebView.getSettings().setBlockNetworkImage(false);//防止阻塞加载图片
-        mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+       // mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
        // mWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         if (Build.VERSION.SDK_INT < 19) {
             if (Build.VERSION.SDK_INT >8) {
