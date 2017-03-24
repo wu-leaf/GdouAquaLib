@@ -23,8 +23,12 @@ import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.entity.netWorkMap;
 import com.gdou.www.gdouaqualib.utils.ActivityCollector;
 import com.gdou.www.gdouaqualib.utils.Constants;
+import com.gdou.www.gdouaqualib.utils.GsonUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
+import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +36,7 @@ import java.util.Set;
 public class SimpleFishActivity extends AppCompatActivity implements View.OnTouchListener{
     LinearLayout fish_shj,fish_td,fish_luandu,fish_dd,fish_xqd,fish_gd,fish_zand,fish_sqd,fish_zsd;
     public Map<String, Object> map;
+    public Map<String,Object> mMap;
     public Set<String> set;
    // private MyApplication app;
 
@@ -86,6 +91,13 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
         map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
 
+
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒鱼类").toString()));
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(mMap.get("毒鱼类").toString()));
+
+
         ActivityCollector.addActivity(this);
     }
     @Override
@@ -113,143 +125,135 @@ public class SimpleFishActivity extends AppCompatActivity implements View.OnTouc
                 break;
 
             case MotionEvent.ACTION_UP:
+                Map<String, Object> map1;
                 MLog.d("点击了该事件" + layout.getTag());
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
                 switch(key) {
                     case "fish_shj":
-                        if (set.contains("珊瑚瞧毒鱼概述")) {
-                            String burl = map.get("珊瑚瞧毒鱼概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "珊瑚瞧毒鱼");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("珊瑚礁毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "珊瑚礁毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
 
                     case "fish_td":
-                        if (set.contains("鲀毒鱼类概述")) {
-                            String burl = map.get("鲀毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "鲀毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("豚毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "豚毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
-                         break;
+                        break;
                     case "fish_luandu":
-                        if (set.contains("卵毒鱼类概述")) {
-                            String burl = map.get("卵毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "卵毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("卵毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "卵毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_dd":
-                        if (set.contains("胆毒鱼类概述")) {
-                            String burl = map.get("胆毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "胆毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("胆毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "胆毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_xqd":
-                        if (set.contains("血清毒鱼类概述")) {
-                            String burl = map.get("血清毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "血清毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("血清毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "血清毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_gd":
-                        if (set.contains("肝毒鱼类概述")) {
-                            String burl = map.get("肝毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "肝毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("肝毒鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "肝毒鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_zand":
-                        if (set.contains("鲭毒鱼类概述")) {
-                            String burl = map.get("鲭毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "鲭毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("易生成组胺毒鱼类（鲭毒鱼类）").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "易生成组胺毒鱼类（鲭毒鱼类）");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_sqd":
-                        if (set.contains("蛇鲭毒鱼类概述")) {
-                            String burl = map.get("蛇鲭毒鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "蛇鲭毒鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("蛇鲭毒鱼类（含蜡脂鱼类）").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "蛇鲭毒鱼类（含蜡脂鱼类）");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }
                         break;
                     case "fish_zsd":
-                        if (set.contains("含真鲨毒素鱼类概述")) {
-                            String burl = map.get("含真鲨毒素鱼类概述").toString().replace("\"", "");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(SimpleFishActivity.this, DetailsActivity.class);
-                            intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "含真鲨毒素鱼类");
-                            intent0.putExtra("url", Constants.AURL + burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this)
-                                            .toBundle());
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("含真鲨毒素鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(SimpleFishActivity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "含真鲨毒素鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SimpleFishActivity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
                         } else {
                             ToastUtil.show(SimpleFishActivity.this, "服务器出问题，请稍候...");
                         }

@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.gdou.www.gdouaqualib.MainActivity;
 import com.gdou.www.gdouaqualib.MyApplication;
 import com.gdou.www.gdouaqualib.R;
 import com.gdou.www.gdouaqualib.entity.netWorkMap;
@@ -34,7 +35,7 @@ import java.util.Set;
 
 public class FishActivity extends AppCompatActivity implements View.OnTouchListener {
     private LinearLayout duyulei,ciduyulei,pifuyulei;
-
+    public Map<String, Object> mMap;
     public Map<String, Object> map;
     public Set<String> set;
 
@@ -76,11 +77,11 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
 
         map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
-/*
+
 
         mMap = GsonUtil.toMap(GsonUtil
                 .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒鱼类").toString()));
-*/
+
 
         ActivityCollector.addActivity(this);
     }
@@ -120,23 +121,20 @@ public class FishActivity extends AppCompatActivity implements View.OnTouchListe
                      intent.putExtra("flag",1);
                      startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
                 } else if(key.contentEquals("pifu_ny_duyulei")){
-                    if (set.contains("皮肤粘液毒鱼类概述")){
-                        String burl = map.get("皮肤粘液毒鱼类概述").toString().replace("\"","");
-                        Log.e("TAG", burl);
-                        Intent intent0 = new Intent(FishActivity.this,DetailsActivity.class);
-                        intent0.putExtra("flag",0);
-                        intent0.putExtra("title","皮肤粘液毒鱼类");
-                        intent0.putExtra("url", Constants.AURL+burl);
-                        startActivity(intent0,
-                                ActivityOptions.makeSceneTransitionAnimation(FishActivity.this)
-                                        .toBundle());
+                    Map<String,Object> map1;
+                    map1 = GsonUtil.toMap(GsonUtil
+                            .parseJson(mMap.get("皮肤粘液毒鱼类").toString()));
+                        //开启一个activity
+                        Intent intent = new Intent(FishActivity.this,ParticularActivity.class);
+                        intent.putExtra("flag",2);
+                        intent.putExtra("title","皮肤粘液毒鱼类");
+                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(FishActivity.this).toBundle());
+                        EventBus.getDefault().postSticky(new MessageEvent(map1));
                     }else{
                         ToastUtil.show(FishActivity.this, "服务器出问题，请稍候...");
                     }
                     break;
-            }
 
-                break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);
                 // animUp.setFillAfter(true);

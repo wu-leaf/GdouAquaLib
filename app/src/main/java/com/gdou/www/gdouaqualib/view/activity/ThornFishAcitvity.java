@@ -35,6 +35,7 @@ import java.util.Set;
 public class ThornFishAcitvity extends AppCompatActivity implements View.OnTouchListener {
     private LinearLayout cidu_yinggu,cidu_ruangu;
     public Map<String, Object> map;
+    public Map<String,Object> mMap;
     public Set<String> set;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,12 @@ public class ThornFishAcitvity extends AppCompatActivity implements View.OnTouch
         map = netWorkMap.getInstance().getMapList();
         set = map.keySet();
 
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒鱼类").toString()));
+
+        mMap = GsonUtil.toMap(GsonUtil
+                .parseJson(mMap.get("刺毒鱼类").toString()));
+
         ActivityCollector.addActivity(this);
     }
     @Override
@@ -97,43 +104,40 @@ public class ThornFishAcitvity extends AppCompatActivity implements View.OnTouch
                 layout.startAnimation(animDwon);
                 animUp.setFillAfter(true);
                 String key = v.getTag().toString();
-                switch (key){
+                switch (key) {
                     case "cidu_yinggu":
-                        if (set != null && set.contains("刺毒硬骨鱼类概述")){
-                            String burl = map.get("刺毒硬骨鱼类概述").toString().replace("\"","");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(ThornFishAcitvity.this,DetailsActivity.class);
-                            intent0.putExtra("flag",0);
-                            intent0.putExtra("title", "刺毒硬骨鱼类");
-                            intent0.putExtra("url", Constants.AURL+burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(ThornFishAcitvity.this)
-                                            .toBundle());
-                        }else{
-                            ToastUtil.show(ThornFishAcitvity.this,"服务器出问题，请稍候...");
+                        Map<String, Object> map1;
+                        map1 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("刺毒硬骨鱼类").toString()));
+                        if (map1 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(ThornFishAcitvity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "刺毒硬骨鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ThornFishAcitvity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map1));
+                        } else {
+                            ToastUtil.show(ThornFishAcitvity.this, "服务器出问题，请稍候...");
                         }
                         break;
 
                     case "cidu_ruangu":
-                        if (set != null && set.contains("刺毒软骨鱼类概述")){
-                            String burl = map.get("刺毒软骨鱼类概述").toString().replace("\"","");
-                            Log.e("TAG", burl);
-                            Intent intent0 = new Intent(ThornFishAcitvity.this,DetailsActivity.class);
-                            intent0.putExtra("flag",0);
-                            intent0.putExtra("title", "刺毒软骨鱼类");
-                            intent0.putExtra("url", Constants.AURL+burl);
-                            startActivity(intent0,
-                                    ActivityOptions.makeSceneTransitionAnimation(ThornFishAcitvity.this)
-                                            .toBundle());
-                        }else{
-                            ToastUtil.show(ThornFishAcitvity.this,"服务器出问题，请稍候...");
+                        Map<String, Object> map2;
+                        map2 = GsonUtil.toMap(GsonUtil
+                                .parseJson(mMap.get("刺毒软骨鱼类").toString()));
+                        if (map2 != null) {
+                            //开启一个activity
+                            Intent intent = new Intent(ThornFishAcitvity.this, ParticularActivity.class);
+                            intent.putExtra("flag", 2);
+                            intent.putExtra("title", "刺毒软骨鱼类");
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ThornFishAcitvity.this).toBundle());
+                            EventBus.getDefault().postSticky(new MessageEvent(map2));
+                        } else {
+                            ToastUtil.show(ThornFishAcitvity.this, "服务器出问题，请稍候...");
                         }
                         break;
                 }
 
-
-
-                break;
             case MotionEvent.ACTION_MOVE:
                 //layout.startAnimation(animUp);
                 // animUp.setFillAfter(true);
