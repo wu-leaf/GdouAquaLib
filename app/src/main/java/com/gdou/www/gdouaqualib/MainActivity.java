@@ -3,8 +3,6 @@ package com.gdou.www.gdouaqualib;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
@@ -27,14 +25,11 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -47,13 +42,11 @@ import com.gdou.www.gdouaqualib.utils.ChechNetwork;
 import com.gdou.www.gdouaqualib.utils.Constants;
 import com.gdou.www.gdouaqualib.utils.DensityUtil;
 import com.gdou.www.gdouaqualib.utils.GsonUtil;
-import com.gdou.www.gdouaqualib.utils.HtmlUtil;
 import com.gdou.www.gdouaqualib.utils.MLog;
 import com.gdou.www.gdouaqualib.utils.MessageEvent;
 import com.gdou.www.gdouaqualib.utils.RefreshMapEvent;
 import com.gdou.www.gdouaqualib.utils.ToastUtil;
 import com.gdou.www.gdouaqualib.utils.VersionCheck;
-import com.gdou.www.gdouaqualib.view.activity.AboutActivity;
 import com.gdou.www.gdouaqualib.view.activity.CoelenteronActivity;
 import com.gdou.www.gdouaqualib.view.activity.DetailsActivity;
 import com.gdou.www.gdouaqualib.view.activity.EchinodermActivity;
@@ -61,18 +54,14 @@ import com.gdou.www.gdouaqualib.view.activity.FishActivity;
 import com.gdou.www.gdouaqualib.view.activity.ParticularActivity;
 import com.gdou.www.gdouaqualib.view.activity.RheidActivity;
 import com.gdou.www.gdouaqualib.view.activity.SearchActivity;
-import com.gdou.www.gdouaqualib.view.activity.SettingActivity;
-import com.gdou.www.gdouaqualib.view.activity.UserGuideActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -375,8 +364,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                 startActivity(intent_setting, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;*/
                             case R.id.action_about:
-                                Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
+                                Intent intent_about = new Intent(MainActivity.this, DetailsActivity.class);
                                 intent_about.putExtra("flag",2);
+                                intent_about.putExtra("title","关 于");
+                                intent_about.putExtra("url",Constants.ABOUT_URL);
                                 startActivity(intent_about,
                                         ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                                 return true;

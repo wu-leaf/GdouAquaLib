@@ -3,6 +3,7 @@ package com.gdou.www.gdouaqualib.utils;
 
 public class Constants {
 
+	public static final String ABOUT_URL ="http://120.77.50.13:8080/fish/us.jsp";
 
 	//http://120.77.50.13:8090/fish/
 	//文章url前缀
