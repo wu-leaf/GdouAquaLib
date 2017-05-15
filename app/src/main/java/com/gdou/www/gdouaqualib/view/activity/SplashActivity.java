@@ -22,11 +22,12 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
 
     int[] imgs = new int[]{
-            R.mipmap.pic_1,
-            R.mipmap.pic_2,
-            R.mipmap.pic_1,
-            R.mipmap.pic_2,
-            R.mipmap.pic_1};
+            R.mipmap.yu2,
+            R.mipmap.yu3,
+            R.mipmap.yu5,
+            R.mipmap.yu2,
+            R.mipmap.yu3,
+            R.mipmap.yu5};
 
 
     ImageView ivBg;
