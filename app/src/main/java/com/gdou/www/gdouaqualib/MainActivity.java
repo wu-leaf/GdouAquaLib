@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public Map<String, Object> map;
     public Set<String> set;
 
-    private LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7;
+    private LinearLayout layout0,layout1,layout2,layout3,layout4,layout5,layout6,layout7;
     private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewpager;
     private TextView tv_title;
@@ -226,6 +226,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             setupDrawerContent(navigationView);//设置左侧导航抽屉
         }
 
+
+        layout0 = (LinearLayout)findViewById(R.id.linear0);
         layout1 = (LinearLayout)findViewById(R.id.linear1);
         layout2 = (LinearLayout)findViewById(R.id.linear2);
         layout3 = (LinearLayout)findViewById(R.id.linear3);
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         layout6 = (LinearLayout)findViewById(R.id.linear6);
         layout7 = (LinearLayout)findViewById(R.id.linear7);
 
+        layout0.setOnTouchListener(this);
         layout1.setOnTouchListener(this);
         layout2.setOnTouchListener(this);
         layout3.setOnTouchListener(this);
@@ -449,6 +452,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     animUp.setFillAfter(true);
                     String key = v.getTag().toString();
                     switch(key){
+                        case "qianyan":
+                            Intent intent_about = new Intent(MainActivity.this, DetailsActivity.class);
+                            intent_about.putExtra("flag",2);
+                            intent_about.putExtra("title","前言");
+                            intent_about.putExtra("url",Constants.ABOUT_URL);
+                            startActivity(intent_about,
+                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            break;
                         case "paxing":
                             Map<String,Object> mappx;
                             mappx = netWorkMap.getInstance().getMapTree();

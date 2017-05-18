@@ -155,7 +155,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                     keymap.clear();
                 }
                 if (checkInput()){
-                   ToastUtil.show(SearchActivity.this, "执行检索..." + urlstr);
+                   //ToastUtil.show(SearchActivity.this, "" + urlstr);
                     getDataFromPost();
 
                 }else if (!checkInput()){
@@ -175,7 +175,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         if (!keymap.keySet().isEmpty()){
             OkHttpUtils.get()
                     .url(Constants.SERVER_URL+"/Search")
-                    //.addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .params(keymap)
                     .build()
                     .execute(new StringCallback() {

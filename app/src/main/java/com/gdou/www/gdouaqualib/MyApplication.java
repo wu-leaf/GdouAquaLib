@@ -25,8 +25,6 @@ public class MyApplication extends Application{
     private static RequestQueue queues ;
     private int value;
 
-
-
     public Map<String, Object> mapList;
     public Map<String, Object> mapTree;
 
