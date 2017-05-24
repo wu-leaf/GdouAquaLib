@@ -121,13 +121,15 @@
                     android:elevation="3dip"
                     android:layout_margin="3dp"
                     android:background="#ffffff">
+
                     <TextView
                         android:drawableTop="@drawable/shuixi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  有毒腔肠动物"
+                        android:text="  有毒刺胞动物"
                         android:layout_gravity="center"
-                        android:textSize="24dp"/>
+                        android:textSize="24dp"
+                        android:id="@+id/textView"/>
                 </LinearLayout>
                 <LinearLayout
                     android:tag="ruanti"

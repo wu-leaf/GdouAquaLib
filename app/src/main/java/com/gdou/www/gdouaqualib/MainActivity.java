@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private final String[] imageDescriptions = {
             "有毒鱼类",
             "有毒软体动物",
-            "有毒腔肠动物",
+            "有毒刺胞动物",
             "有毒爬行动物",
             "有毒节肢动物",
             "有毒棘皮动物",
@@ -718,13 +718,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                                     ToastUtil.show(MainActivity.this, "服务器出问题，请稍候...");
                                 }
                                 break;
-                            case "有毒腔肠动物":
-                                if (set.contains("海洋有毒腔肠动物概述")) {
-                                    String burl = map.get("海洋有毒腔肠动物概述").toString().replace("\"", "");
+                            case "有毒刺胞动物":
+                                if (set.contains("海洋有毒刺胞动物概述")) {
+                                    String burl = map.get("海洋有毒刺胞动物概述").toString().replace("\"", "");
                                     Log.e("TAG", burl);
                                     Intent intent0 = new Intent(MainActivity.this, DetailsActivity.class);
                                     intent0.putExtra("flag", 0);
-                                    intent0.putExtra("title", "有毒腔肠动物");
+                                    intent0.putExtra("title", "有毒刺胞动物");
                                     intent0.putExtra("url", Constants.AURL + burl);
                                     startActivity(intent0,
                                             ActivityOptions.makeSceneTransitionAnimation(MainActivity.this)

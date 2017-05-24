@@ -140,7 +140,7 @@ public final class ParticularActivity extends ListActivity {
                     // Update the LastUpdatedLabel
                     //设置更新时间
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                    Toast.makeText(ParticularActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ParticularActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
 
                     new GetDataTask().execute();
                 }
@@ -158,7 +158,7 @@ public final class ParticularActivity extends ListActivity {
                     // Update the LastUpdatedLabel
                     //设置更新时间
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                    Toast.makeText(ParticularActivity.this, "上拉刷新!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ParticularActivity.this, "上拉刷新!", Toast.LENGTH_SHORT).show();
                     new GetDataTask().execute();
                 }
 

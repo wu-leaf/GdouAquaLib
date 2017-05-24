@@ -63,7 +63,7 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         //EventBus.getDefault().register(this);//注册事件
 
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("有毒腔肠动物");
+        toolbar.setTitle("有毒刺胞动物");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -79,7 +79,7 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         //app = (MyApplication)getApplication();
 
         mMap = GsonUtil.toMap(GsonUtil
-                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒腔肠动物").toString()));
+                .parseJson(netWorkMap.getInstance().getMapTree().get("海洋有毒刺胞动物").toString()));
 
 
         ActivityCollector.addActivity(this);
@@ -121,12 +121,12 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
                     case "qc_gaishu":
                         Map<String,Object> mapList;
                         mapList = netWorkMap.getInstance().getMapList();
-                        if (mapList.keySet().contains("海洋有毒腔肠动物概述")){
-                            String burl = mapList.get("海洋有毒腔肠动物概述").toString().replace("\"", "");
+                        if (mapList.keySet().contains("海洋有毒刺胞动物概述")){
+                            String burl = mapList.get("海洋有毒刺胞动物概述").toString().replace("\"", "");
                             Log.e("TAG", burl);
                             Intent intent0 = new Intent(CoelenteronActivity.this, DetailsActivity.class);
                             intent0.putExtra("flag", 0);
-                            intent0.putExtra("title", "有毒腔肠动物");
+                            intent0.putExtra("title", "有毒刺胞动物");
                             intent0.putExtra("url", Constants.AURL + burl);
                             startActivity(intent0,
                                     ActivityOptions.makeSceneTransitionAnimation(CoelenteronActivity.this)
@@ -188,11 +188,11 @@ public class CoelenteronActivity extends AppCompatActivity implements View.OnTou
         }
         return true;    //这时必须返回true，不然 MotionEvent.ACTION_UP 没效果
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-       // EventBus.getDefault().unregister(this);
-        ActivityCollector.removeActivity(this);
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            // EventBus.getDefault().unregister(this);
+            ActivityCollector.removeActivity(this);
     }
 }
 
